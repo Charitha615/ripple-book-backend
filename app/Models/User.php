@@ -22,6 +22,16 @@ class User extends Authenticatable
         'email',
         'password',
         'user_type',
+        "is_events_coordinator",
+        "is_community_service_coordinator",
+        "is_dana_coordinator",
+        "is_meditate_with_us_coordinator",
+        "is_dhamma_talks_coordinator",
+        "is_arama_poojawa_coordinator",
+        "is_build_up_hermitage_coordinator ",
+        "is_donation_coordinator",
+        "gender",
+        "nic",
     ];
 
     /**
