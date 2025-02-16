@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AuditUserLog;
+use App\Models\AuditAdminLog;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class AuditUserLogController extends Controller
+class AuditAdminLogController extends Controller
 {
     public static function createLog(array $data)
     {
@@ -33,6 +33,6 @@ class AuditUserLogController extends Controller
         $data['action_date_time'] = now();
 
         // Save the log entry to the database
-        AuditUserLog::create($data);
+        AuditAdminLog::create($data);
     }
 }

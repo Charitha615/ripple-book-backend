@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class AuditUserLog extends Model
+class UserLog extends Model
 {
-    use HasFactory, SoftDeletes;
+    use SoftDeletes, HasFactory ;// Enables soft deletes
 
     protected $fillable = [
         'user_id',
+        'form_id',
         'user_name',
         'user_role',
         'action_type',
@@ -21,5 +22,11 @@ class AuditUserLog extends Model
         'new_values',
         'description',
         'ip_address',
+    ];
+
+    protected $casts = [
+        'old_values' => 'json',
+        'new_values' => 'json',
+        'action_date_time' => 'datetime',
     ];
 }
