@@ -11,29 +11,29 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('audit_user_logs', function (Blueprint $table) {
+        Schema::create('user_logs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable(); // Nullable for guest users
+            $table->unsignedBigInteger('form_id')->nullable();
             $table->string('user_name');
-            $table->string('user_role');
+            $table->string('user_role')->default('guest');
             $table->string('action_type');
             $table->dateTime('action_date_time');
             $table->string('entity_area');
-            $table->text('old_values')->nullable();
-            $table->text('new_values')->nullable();
+            $table->json('old_values')->nullable();
+            $table->json('new_values')->nullable();
             $table->text('description')->nullable();
-            $table->string('ip_address')->nullable();
+            $table->string('ip_address');
             $table->timestamps();
-            $table->softDeletes();
+            $table->softDeletes(); // Enables soft deletes
         });
     }
-
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('audit_user_logs');
+        Schema::dropIfExists('user_logs');
     }
 };

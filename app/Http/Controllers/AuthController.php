@@ -39,7 +39,7 @@ class AuthController extends Controller
         $token = $user->createToken('LaravelAuthApp')->plainTextToken;
 
         // Log the user creation
-        AuditUserLogController::createLog([
+        AuditAdminLogController::createLog([
             'user_id' => $user->id,
             'action_type' => 'Register',
             'entity_area' => 'User Management',
@@ -92,7 +92,7 @@ class AuthController extends Controller
             $token = $user->createToken('LaravelAuthApp')->plainTextToken;
 
             // Log the successful login attempt
-            AuditUserLogController::createLog([
+            AuditAdminLogController::createLog([
                 'user_id' => $user->id,
                 'action_type' => 'Login',
                 'entity_area' => 'User Management',
