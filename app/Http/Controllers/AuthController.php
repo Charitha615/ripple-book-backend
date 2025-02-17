@@ -110,7 +110,7 @@ class AuthController extends Controller
                     'id' => $user->id,
                     'name' => $user->name,
                     'email' => $user->email,
-                    'user_type'=>$user->user_type,
+                    'user_type' => $user->user_type,
                 ],
             ], 200);
         } else {
@@ -118,8 +118,15 @@ class AuthController extends Controller
         }
     }
 
+    public function logout(Request $request)
+    {
+        // Revoke the user's current access token
+        $request->user()->currentAccessToken()->delete();
 
-
+        return response()->json([
+            'message' => 'Logout successful'
+        ], 200);
+    }
 
 
 }
