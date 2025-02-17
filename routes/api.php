@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SermonRequestController;
+use App\Http\Controllers\DanaAtHomeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,7 @@ Route::middleware('auth:sanctum')->post('/create-user', [UserController::class, 
 
 //Sermon API
 Route::post('/sermon-request', [SermonRequestController::class, 'store']);
+Route::post('/danaAtHome-request', [DanaAtHomeController::class, 'store']);
 
 Route::middleware('auth:api')->group(function () {
 });
