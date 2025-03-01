@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SermonRequest;
+use App\Models\DanaAtHome;
 use Illuminate\Http\Request;
 
-class SermonRequestController extends Controller
+class DanaAtHomeController extends Controller
 {
     public function store(Request $request)
     {
@@ -15,10 +15,10 @@ class SermonRequestController extends Controller
             'mobileNumber' => 'required|string|max:255',
             'wtNumber' => 'nullable|string|max:255',
             'email' => 'required|email|max:255',
-            'date' => 'required|string|max:255',
-            'time' => 'required|string|max:255',
-            'count' => 'nullable|string|max:255',
-            'option' => 'nullable|string|max:255',
+            'dana_for_lunch' => 'boolean',
+            'dana_for_morning' => 'boolean',
+            'specific_event' => 'nullable|string|max:255',
+            'other' => 'nullable|string|max:255',
             'birthday' => 'boolean',
             'sevenday' => 'boolean',
             'warming' => 'boolean',
@@ -29,16 +29,16 @@ class SermonRequestController extends Controller
             'ip_address' => 'required|string|max:255',
         ]);
 
-        $sermonRequest = SermonRequest::create([
+        $danaAtHomeRequest = DanaAtHome::create([
             'first_name' => $validatedData['firstName'],
             'last_name' => $validatedData['lastName'],
             'mobile_number' => $validatedData['mobileNumber'],
             'wt_number' => $validatedData['wtNumber'],
             'email' => $validatedData['email'],
-            'date' => $validatedData['date'],
-            'time' => $validatedData['time'],
-            'count' => $validatedData['count'],
-            'option' => $validatedData['option'],
+            'dana_for_lunch' => $validatedData['dana_for_lunch'],
+            'dana_for_morning' => $validatedData['dana_for_morning'],
+            'specific_event' => $validatedData['specific_event'],
+            'other' => $validatedData['other'],
             'birthday' => $validatedData['birthday'],
             'sevenday' => $validatedData['sevenday'],
             'warming' => $validatedData['warming'],
@@ -52,14 +52,14 @@ class SermonRequestController extends Controller
         // Log the user activity
         UserLogController::createLog([
             'user_id' => null, // No user ID for public forms
-            'form_id' => $sermonRequest->id,
+            'form_id' => $danaAtHomeRequest->id,
             'action_type' => 'form_submission',
-            'entity_area' => 'Damma Sermons Request',
+            'entity_area' => 'Dana At Home Request',
             'old_values' => null, // No old values for a new submission
-            'new_values' => $sermonRequest,
-            'description' => $validatedData['firstName'] . " submitted a Damma Sermons Request. Mobile number is " . $validatedData['mobileNumber'],
+            'new_values' => $danaAtHomeRequest,
+            'description' => $validatedData['firstName'] . " submitted a Dana At Home Request. Mobile number is " . $validatedData['mobileNumber'],
         ]);
 
-        return response()->json(['message' => 'Sermon request submitted successfully', 'data' => $sermonRequest], 201);
+        return response()->json(['message' => 'Sermon request submitted successfully', 'data' => $danaAtHomeRequest], 201);
     }
 }
