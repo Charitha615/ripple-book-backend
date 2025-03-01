@@ -57,7 +57,7 @@ class SermonRequestController extends Controller
             'entity_area' => 'Damma Sermons Request',
             'old_values' => null, // No old values for a new submission
             'new_values' => $sermonRequest,
-            'description' => $validatedData['firstName'] . " submitted a sermon request. Mobile number is " . $validatedData['mobileNumber'],
+            'description' => $validatedData['firstName'] . " submitted a Damma Sermons Request. Mobile number is " . $validatedData['mobileNumber'],
         ]);
 
         return response()->json(['message' => 'Sermon request submitted successfully', 'data' => $sermonRequest], 201);

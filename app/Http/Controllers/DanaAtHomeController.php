@@ -57,7 +57,7 @@ class DanaAtHomeController extends Controller
             'entity_area' => 'Dana At Home Request',
             'old_values' => null, // No old values for a new submission
             'new_values' => $danaAtHomeRequest,
-            'description' => $validatedData['firstName'] . " submitted a sermon request. Mobile number is " . $validatedData['mobileNumber'],
+            'description' => $validatedData['firstName'] . " submitted a Dana At Home Request. Mobile number is " . $validatedData['mobileNumber'],
         ]);
 
         return response()->json(['message' => 'Sermon request submitted successfully', 'data' => $danaAtHomeRequest], 201);
