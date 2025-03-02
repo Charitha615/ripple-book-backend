@@ -4,7 +4,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DanaPaymentRequestController;
 use App\Http\Controllers\DanaRequestController;
 use App\Http\Controllers\ExternalRetreatHallamController;
+use App\Http\Controllers\ExternalRetreatPackenhamController;
 use App\Http\Controllers\ExternalRetreatRequestFormGlenWaverleyController;
+use App\Http\Controllers\FiveYearRequestController;
+use App\Http\Controllers\FuturePlansRequestFormController;
+use App\Http\Controllers\GilanPasaRequestController;
 use App\Http\Controllers\SermonRequestController;
 use App\Http\Controllers\DanaAtHomeController;
 use App\Http\Controllers\UserController;
@@ -57,9 +61,18 @@ Route::post('/dana-request', [DanaRequestController::class, 'store']);
 //External Retreat Request Form Glen Waverley
 Route::post('/external_retreat_request_form_glen_waverley-request', [ExternalRetreatRequestFormGlenWaverleyController::class, 'store']);
 
-//External Retreat Request Form Glen Waverley
+//External Retreat Request Form Hallam
 Route::post('/external_retreat_request_form_hallam-request', [ExternalRetreatHallamController::class, 'store']);
 
+//External Retreat Request Form Packenham
+Route::post('/external_retreat_request_form_packenham-request', [ExternalRetreatPackenhamController::class, 'store']);
 
+//Future Plans Request Form
+Route::post('/future_plans_request_form-request', [FuturePlansRequestFormController::class, 'store']);
 
+//Five Year Request Form
+Route::post('/five_year-request', [FiveYearRequestController::class, 'store']);
+
+//Gilan Pasa Request Form
+Route::post('/gilanpasa-request', [GilanPasaRequestController::class, 'store']);
 
