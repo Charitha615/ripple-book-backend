@@ -35,14 +35,100 @@ Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
 ///////////////////////////////////////////////////// ADMIN API /////////////////////////////////////////////////////
+/// User API
 
 Route::middleware('auth:sanctum')->post('/users', [UserController::class, 'getAllUsers']);
 Route::middleware('auth:sanctum')->post('/create-user', [UserController::class, 'createUser']);
+Route::middleware('auth:sanctum')->get('/get-all-users', [UserController::class, 'getAllUsers']);
+Route::middleware('auth:sanctum')->get('/get-user/{id}', [UserController::class, 'getUserById']);
+Route::middleware('auth:sanctum')->put('/edit-user/{id}', [UserController::class, 'editUser']);
+Route::middleware('auth:sanctum')->delete('/soft-delete-user/{id}', [UserController::class, 'softDeleteUser']);
 
 
-Route::middleware('auth:api')->group(function () {
+
+/// sermon-request API
+
+Route::middleware('auth:sanctum')->get('/get-sermon-requests', [SermonRequestController::class, 'getAll']);
+Route::middleware('auth:sanctum')->get('/get-sermon-request/{id}', [SermonRequestController::class, 'getById']);
+Route::middleware('auth:sanctum')->put('/edit-sermon-request/{id}', [SermonRequestController::class, 'edit']);
+Route::middleware('auth:sanctum')->delete('/delete-sermon-request/{id}', [SermonRequestController::class, 'softDelete']);
+
+
+// Dana At Home API
+Route::middleware('auth:sanctum')->group(function() {
+    Route::get('/get-dana-at-home-requests', [DanaAtHomeController::class, 'getAll']);
+    Route::get('/get-dana-at-home-request/{id}', [DanaAtHomeController::class, 'getById']);
+    Route::put('/edit-dana-at-home-request/{id}', [DanaAtHomeController::class, 'edit']);
+    Route::delete('/delete-dana-at-home-request/{id}', [DanaAtHomeController::class, 'softDelete']);
 });
 
+// Dana Payment Request API
+Route::middleware('auth:sanctum')->group(function() {
+    Route::get('/get-dana-payment-requests', [DanaPaymentRequestController::class, 'getAll']);
+    Route::get('/get-dana-payment-request/{id}', [DanaPaymentRequestController::class, 'getById']);
+    Route::put('/edit-dana-payment-request/{id}', [DanaPaymentRequestController::class, 'edit']);
+    Route::delete('/delete-dana-payment-request/{id}', [DanaPaymentRequestController::class, 'softDelete']);
+});
+
+// Dana Request API
+Route::middleware('auth:sanctum')->group(function() {
+    Route::get('/get-dana-requests', [DanaRequestController::class, 'getAll']);
+    Route::get('/get-dana-request/{id}', [DanaRequestController::class, 'getById']);
+    Route::put('/edit-dana-request/{id}', [DanaRequestController::class, 'edit']);
+    Route::delete('/delete-dana-request/{id}', [DanaRequestController::class, 'softDelete']);
+});
+
+// External Retreat Request Form Glen Waverley API
+Route::middleware('auth:sanctum')->group(function() {
+    Route::get('/get-external-retreat-requests-gw', [ExternalRetreatRequestFormGlenWaverleyController::class, 'getAll']);
+    Route::get('/get-external-retreat-request-gw/{id}', [ExternalRetreatRequestFormGlenWaverleyController::class, 'getById']);
+    Route::put('/edit-external-retreat-request-gw/{id}', [ExternalRetreatRequestFormGlenWaverleyController::class, 'edit']);
+    Route::delete('/delete-external-retreat-request-gw/{id}', [ExternalRetreatRequestFormGlenWaverleyController::class, 'softDelete']);
+});
+
+
+// External Retreat Hallam API
+Route::middleware('auth:sanctum')->group(function() {
+    Route::get('/get-external-retreat-hallam-requests', [ExternalRetreatHallamController::class, 'getAll']);
+    Route::get('/get-external-retreat-hallam-request/{id}', [ExternalRetreatHallamController::class, 'getById']);
+    Route::put('/edit-external-retreat-hallam-request/{id}', [ExternalRetreatHallamController::class, 'edit']);
+    Route::delete('/delete-external-retreat-hallam-request/{id}', [ExternalRetreatHallamController::class, 'softDelete']);
+});
+
+
+// External Retreat Packenham API
+Route::middleware('auth:sanctum')->group(function() {
+    Route::get('/get-external-retreat-packenham-requests', [ExternalRetreatPackenhamController::class, 'getAll']);
+    Route::get('/get-external-retreat-packenham-request/{id}', [ExternalRetreatPackenhamController::class, 'getById']);
+    Route::put('/edit-external-retreat-packenham-request/{id}', [ExternalRetreatPackenhamController::class, 'edit']);
+    Route::delete('/delete-external-retreat-packenham-request/{id}', [ExternalRetreatPackenhamController::class, 'softDelete']);
+});
+
+
+// Future Plans Request Form API
+Route::middleware('auth:sanctum')->group(function() {
+    Route::get('/get-future-plans-requests', [FuturePlansRequestFormController::class, 'getAll']);
+    Route::get('/get-future-plans-request/{id}', [FuturePlansRequestFormController::class, 'getById']);
+    Route::put('/edit-future-plans-request/{id}', [FuturePlansRequestFormController::class, 'edit']);
+    Route::delete('/delete-future-plans-request/{id}', [FuturePlansRequestFormController::class, 'softDelete']);
+});
+
+// Five-Year Request API
+Route::middleware('auth:sanctum')->group(function() {
+    Route::get('/get-five-year-requests', [FiveYearRequestController::class, 'getAll']);
+    Route::get('/get-five-year-request/{id}', [FiveYearRequestController::class, 'getById']);
+    Route::put('/edit-five-year-request/{id}', [FiveYearRequestController::class, 'edit']);
+    Route::delete('/delete-five-year-request/{id}', [FiveYearRequestController::class, 'softDelete']);
+});
+
+
+// Gilan Pasa Request API
+Route::middleware('auth:sanctum')->group(function() {
+    Route::get('/get-gilan-pasa-requests', [GilanPasaRequestController::class, 'getAll']);
+    Route::get('/get-gilan-pasa-request/{id}', [GilanPasaRequestController::class, 'getById']);
+    Route::put('/edit-gilan-pasa-request/{id}', [GilanPasaRequestController::class, 'edit']);
+    Route::delete('/delete-gilan-pasa-request/{id}', [GilanPasaRequestController::class, 'softDelete']);
+});
 
 ///////////////////////////////////////////////////// PUBLIC API /////////////////////////////////////////////////////
 
@@ -70,7 +156,7 @@ Route::post('/external_retreat_request_form_packenham-request', [ExternalRetreat
 //Future Plans Request Form
 Route::post('/future_plans_request_form-request', [FuturePlansRequestFormController::class, 'store']);
 
-//Five Year Request Form
+//Five-Year Request Form
 Route::post('/five_year-request', [FiveYearRequestController::class, 'store']);
 
 //Gilan Pasa Request Form

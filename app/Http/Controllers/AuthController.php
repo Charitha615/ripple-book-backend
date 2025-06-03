@@ -111,6 +111,19 @@ class AuthController extends Controller
                     'name' => $user->name,
                     'email' => $user->email,
                     'user_type' => $user->user_type,
+                    'gender' => $user->gender,
+                    'nic' => $user->nic,
+                    'account_created_date' => $user->created_at,
+                ],
+                'access_area' => [
+                    'is_events_coordinator' => $user->is_events_coordinator,
+                    'is_community_service_coordinator' => $user->is_community_service_coordinator,
+                    'is_dana_coordinator' => $user->is_dana_coordinator,
+                    'is_meditate_with_us_coordinator' => $user->is_meditate_with_us_coordinator,
+                    'is_dhamma_talks_coordinator' => $user->is_dhamma_talks_coordinator,
+                    'is_arama_poojawa_coordinator' => $user->is_arama_poojawa_coordinator,
+                    'is_build_up_hermitage_coordinator' => $user->is_build_up_hermitage_coordinator,
+                    'is_donation_coordinator' => $user->is_donation_coordinator,
                 ],
             ], 200);
         } else {
