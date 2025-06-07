@@ -137,16 +137,16 @@ class DanaPaymentRequestController extends Controller
             // Capture old values for audit log
             $oldValues = $danaPaymentRequest->getAttributes();
 
-            // Validate the request data
+            // Validate the request data using snake_case keys
             $validator = Validator::make($request->all(), [
-                'firstName' => 'required|string|max:255',
-                'lastName' => 'required|string|max:255',
-                'mobileNumber' => 'required|string|max:255',
-                'wtNumber' => 'nullable|string|max:255',
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'mobile_number' => 'required|string|max:255',
+                'wt_number' => 'nullable|string|max:255',
                 'email' => 'required|email|max:255',
                 'dana_for_lunch' => 'boolean',
                 'dana_for_morning' => 'boolean',
-                'date' => 'nullable|string|max:255',
+                'dana_event_date' => 'nullable|string|max:255', // Changed from 'date' to match DB column
             ]);
 
             if ($validator->fails()) {
@@ -157,16 +157,16 @@ class DanaPaymentRequestController extends Controller
                 ], 422);
             }
 
-            // Update the Dana Payment request
+            // Update the Dana Payment request with consistent field names
             $danaPaymentRequest->update([
-                'first_name' => $request->firstName,
-                'last_name' => $request->lastName,
-                'mobile_number' => $request->mobileNumber,
-                'wt_number' => $request->wtNumber ?? null,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'mobile_number' => $request->mobile_number,
+                'wt_number' => $request->wt_number ?? null,
                 'email' => $request->email,
                 'dana_for_lunch' => $request->dana_for_lunch ?? false,
                 'dana_for_morning' => $request->dana_for_morning ?? false,
-                'dana_event_date' => $request->date ?? null,
+                'dana_event_date' => $request->dana_event_date ?? null, // Changed from 'date'
             ]);
 
             // Create admin audit log

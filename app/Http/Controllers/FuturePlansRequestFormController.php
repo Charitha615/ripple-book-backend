@@ -141,10 +141,10 @@ class FuturePlansRequestFormController extends Controller
             // Capture old values for audit log
             $oldValues = $futurePlansRequest->getAttributes();
 
-            // Validate the request data
+            // Validate the request data with consistent snake_case
             $validator = Validator::make($request->all(), [
-                'firstName' => 'required|string|max:255',
-                'lastName' => 'required|string|max:255',
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
                 'address' => 'required|string|max:255',
                 'city' => 'nullable|string|max:255',
                 'postal_code' => 'nullable|string|max:255',
@@ -163,10 +163,10 @@ class FuturePlansRequestFormController extends Controller
                 ], 422);
             }
 
-            // Update the future plans request
+            // Update with consistent field names
             $futurePlansRequest->update([
-                'first_name' => $request->firstName,
-                'last_name' => $request->lastName,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
                 'address' => $request->address,
                 'city' => $request->city ?? null,
                 'postal_code' => $request->postal_code ?? null,

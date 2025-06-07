@@ -135,10 +135,10 @@ class GilanPasaRequestController extends Controller
 
             // Validate the request data
             $validator = Validator::make($request->all(), [
-                'firstName' => 'required|string|max:255',
-                'lastName' => 'required|string|max:255',
-                'mobileNumber' => 'required|string|max:255',
-                'wtNumber' => 'nullable|string|max:255',
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'mobile_number' => 'required|string|max:255',
+                'wt_number' => 'nullable|string|max:255',
                 'email' => 'required|email|max:255',
                 'date' => 'nullable|string|max:255',
             ]);
@@ -153,10 +153,10 @@ class GilanPasaRequestController extends Controller
 
             // Update the Gilan Pasa request
             $gilanPasaRequest->update([
-                'first_name' => $request->firstName,
-                'last_name' => $request->lastName,
-                'mobile_number' => $request->mobileNumber,
-                'wt_number' => $request->wtNumber ?? null,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'mobile_number' => $request->mobile_number,
+                'wt_number' => $request->wt_number ?? null,
                 'email' => $request->email,
                 'date' => $request->date ?? null,
             ]);
