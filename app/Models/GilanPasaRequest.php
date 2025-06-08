@@ -19,6 +19,8 @@ class GilanPasaRequest extends Model
         'email',
         'date',
         'ip_address',
+        'status',
+        'status_reason',
     ];
 
     protected $dates = ['deleted_at'];

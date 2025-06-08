@@ -266,4 +266,81 @@ class DanaPaymentRequestController extends Controller
             ], 500);
         }
     }
+
+
+    public function updateStatus(Request $request, $id)
+    {
+        try {
+            $Request = DanaPaymentRequest::find($id);
+
+            if (!$Request) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'DanaPaymentRequest request not found'
+                ], 404);
+            }
+
+            // Validate input
+            $validator = Validator::make($request->all(), [
+                'status' => 'required|in:Pending,Approved,Rejected,On hold',
+                'status_reason' => 'nullable|string|max:1000',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Validation failed',
+                    'errors' => $validator->errors()
+                ], 422);
+            }
+
+            $status = $request->input('status');
+            $reason = $request->input('status_reason');
+
+            // Require reason for Approved, Rejected, On hold
+            if (in_array($status, ['Approved', 'Rejected', 'On hold']) && empty($reason)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Status reason is required when status is Approved, Rejected, or On hold'
+                ], 422);
+            }
+
+            // Capture old values before updating
+            $oldValues = $Request->getAttributes();
+
+            // Update the status
+            $Request->update([
+                'status' => $status,
+                'status_reason' => $reason
+            ]);
+
+            // Capture new values after updating
+            $newValues = $Request->fresh()->getAttributes();
+
+            // Log to AuditAdminLog
+            AuditAdminLogController::createLog([
+                'user_id' => Auth::id(),
+                'action_type' => 'Status Change',
+                'entity_area' => 'Dana Payment Request',
+                'description' => "Changed status of Dana Payment Request request ID: {$id} to '{$status}'",
+                'old_values' => json_encode($oldValues),
+                'new_values' => json_encode($newValues),
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Status updated successfully',
+                'data' => $Request
+            ], 200);
+
+        } catch (\Exception $e) {
+            Log::error('Error updating Dana Payment Request request status: ' . $e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to update status',
+                'error' => 'Please try again later'
+            ], 500);
+        }
+    }
 }

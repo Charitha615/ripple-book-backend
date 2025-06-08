@@ -42,4 +42,43 @@ class UserLogController extends Controller
         // Save the log entry to the database
         UserLog::create($data);
     }
+
+    /**
+     * Get all user logs
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getAllLogs(Request $request)
+    {
+//        $logs = UserLog::orderBy('action_date_time', 'desc')->get();
+//        return response()->json($logs);
+
+        $perPage = $request->input('per_page', 15); // Default to 15 items per page
+        $logs = UserLog::orderBy('action_date_time', 'desc')
+            ->paginate($perPage);
+
+        return response()->json([
+            'data' => $logs->items(),
+            'meta' => [
+                'current_page' => $logs->currentPage(),
+                'last_page' => $logs->lastPage(),
+                'per_page' => $logs->perPage(),
+                'total' => $logs->total(),
+            ]
+        ]);
+    }
+
+    /**
+     * Get logs for a specific user
+     *
+     * @param int $userId
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getUserLogs($userId)
+    {
+        $logs = UserLog::where('user_id', $userId)
+            ->orderBy('action_date_time', 'desc')
+            ->get();
+        return response()->json($logs);
+    }
 }

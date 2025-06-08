@@ -19,6 +19,8 @@ class DanaRequest extends Model
         'email',
         'dana_event_date',
         'ip_address',
+        'status',
+        'status_reason',
     ];
 
     protected $dates = ['deleted_at'];

@@ -30,6 +30,8 @@ class FiveYearRequest extends Model
         '50_land_plots',
         'query',
         'ip_address',
+        'status',
+        'status_reason',
     ];
 
     protected $dates = ['deleted_at'];

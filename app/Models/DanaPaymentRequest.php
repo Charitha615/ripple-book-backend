@@ -20,7 +20,9 @@ class DanaPaymentRequest extends Model
         'dana_for_morning',
         'dana_for_lunch',
         'dana_event_date',
-        'ip_address', // Include the IP address field
+        'ip_address',
+        'status',
+        'status_reason',
     ];
 
     protected $dates = ['deleted_at'];

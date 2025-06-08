@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('email');
             $table->string('date');
             $table->string('ip_address',45)->nullable();
+            $table->enum('status', ['Pending', 'Approved', 'Rejected', 'On hold'])->default('Pending');
+            $table->text('status_reason')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -19,6 +19,8 @@ class ExternalRetreatPackenham extends Model
         'email',
         'number_of_people',
         'ip_address',
+        'status',
+        'status_reason',
     ];
 
     protected $dates = ['deleted_at'];

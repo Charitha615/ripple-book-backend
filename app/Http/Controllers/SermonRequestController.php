@@ -259,6 +259,7 @@ class SermonRequestController extends Controller
             ], 500);
         }
     }
+
     public function softDelete($id)
     {
         DB::beginTransaction();
@@ -305,4 +306,81 @@ class SermonRequestController extends Controller
             ], 500);
         }
     }
+
+    public function updateStatus(Request $request, $id)
+    {
+        try {
+            $sermonRequest = SermonRequest::find($id);
+
+            if (!$sermonRequest) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Sermon request not found'
+                ], 404);
+            }
+
+            // Validate input
+            $validator = Validator::make($request->all(), [
+                'status' => 'required|in:Pending,Approved,Rejected,On hold',
+                'status_reason' => 'nullable|string|max:1000',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Validation failed',
+                    'errors' => $validator->errors()
+                ], 422);
+            }
+
+            $status = $request->input('status');
+            $reason = $request->input('status_reason');
+
+            // Require reason for Approved, Rejected, On hold
+            if (in_array($status, ['Approved', 'Rejected', 'On hold']) && empty($reason)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Status reason is required when status is Approved, Rejected, or On hold'
+                ], 422);
+            }
+
+            // Capture old values before updating
+            $oldValues = $sermonRequest->getAttributes();
+
+            // Update the status
+            $sermonRequest->update([
+                'status' => $status,
+                'status_reason' => $reason
+            ]);
+
+            // Capture new values after updating
+            $newValues = $sermonRequest->fresh()->getAttributes();
+
+            // Log to AuditAdminLog
+            AuditAdminLogController::createLog([
+                'user_id' => Auth::id(),
+                'action_type' => 'Status Change',
+                'entity_area' => 'Damma Sermons Request',
+                'description' => "Changed status of sermon request ID: {$id} to '{$status}'",
+                'old_values' => json_encode($oldValues),
+                'new_values' => json_encode($newValues),
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Status updated successfully',
+                'data' => $sermonRequest
+            ], 200);
+
+        } catch (\Exception $e) {
+            Log::error('Error updating sermon request status: ' . $e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to update status',
+                'error' => 'Please try again later'
+            ], 500);
+        }
+    }
+
 }

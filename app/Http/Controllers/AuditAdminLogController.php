@@ -35,4 +35,24 @@ class AuditAdminLogController extends Controller
         // Save the log entry to the database
         AuditAdminLog::create($data);
     }
+
+    /**
+     * Get all audit logs with pagination
+     */
+    public function index(Request $request)
+    {
+        $perPage = $request->input('per_page', 15); // Default to 15 items per page
+        $logs = AuditAdminLog::orderBy('action_date_time', 'desc')
+            ->paginate($perPage);
+
+        return response()->json([
+            'data' => $logs->items(),
+            'meta' => [
+                'current_page' => $logs->currentPage(),
+                'last_page' => $logs->lastPage(),
+                'per_page' => $logs->perPage(),
+                'total' => $logs->total(),
+            ]
+        ]);
+    }
 }

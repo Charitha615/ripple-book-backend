@@ -28,7 +28,9 @@ class DanaAtHome extends Model
         'oneyear',
         'annually',
         'weddings',
-        'ip_address', // Include the IP address field
+        'ip_address',
+        'status',
+        'status_reason',
     ];
 
     protected $dates = ['deleted_at'];

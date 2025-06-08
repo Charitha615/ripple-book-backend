@@ -23,6 +23,9 @@ class FuturePlansRequestForm extends Model
         'contribute',
         'inquire',
         'ip_address',
+        'status',
+        'status_reason',
+
     ];
 
     protected $dates = ['deleted_at'];
