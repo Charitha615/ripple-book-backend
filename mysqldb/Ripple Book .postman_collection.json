@@ -1082,7 +1082,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Doe\",\r\n    \"mobileNumber\": \"1234567890\",\r\n    \"wtNumber\": \"WT12345\",\r\n    \"email\": \"john.doe@example.com\",\r\n    \"date\": \"2023-12-25\",\r\n    \"time\": \"10:00 AM\",\r\n    \"count\": \"5\",\r\n    \"option\": \"Some option\",\r\n    \"birthday\": true,\r\n    \"sevenday\": false,\r\n    \"warming\": true,\r\n    \"threemonths\": false,\r\n    \"oneyear\": true,\r\n    \"annually\": false,\r\n    \"weddings\": true\r\n}",
+									"raw": "{\r\n    \"first_name\": \"John\",\r\n    \"last_name\": \"Doe\",\r\n    \"mobile_number\": \"1234567890\",\r\n    \"wt_number\": \"WT12345\",\r\n    \"email\": \"john.doe@example.com\",\r\n    \"date\": \"2023-12-25\",\r\n    \"time\": \"10:00 AM\",\r\n    \"count\": \"5\",\r\n    \"option\": \"Some option\",\r\n    \"birthday\": true,\r\n    \"sevenday\": false,\r\n    \"warming\": true,\r\n    \"threemonths\": false,\r\n    \"oneyear\": true,\r\n    \"annually\": false,\r\n    \"weddings\": true\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1090,13 +1090,51 @@
 									}
 								},
 								"url": {
-									"raw": "{{url-l}}api/edit-sermon-request/1",
+									"raw": "{{url-l}}api/edit-sermon-request/4",
 									"host": [
 										"{{url-l}}api"
 									],
 									"path": [
 										"edit-sermon-request",
-										"1"
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Status Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{authToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\": \"Approved\",\r\n    \"status_reason\": \"Approved the request\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url-l}}api/sermon-request/2/status",
+									"host": [
+										"{{url-l}}api"
+									],
+									"path": [
+										"sermon-request",
+										"2",
+										"status"
 									]
 								}
 							},
@@ -1177,14 +1215,23 @@
 								},
 								"method": "PUT",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"first_name\": \"John\",\r\n    \"last_name\": \"Doe\",\r\n    \"mobile_number\": \"1234567890\",\r\n    \"wt_number\": \"WT12345\",\r\n    \"email\": \"john.doe@example.com\",\r\n    \"dana_for_lunch\": true,\r\n    \"dana_for_morning\": false,\r\n    \"specific_event\": \"Some special occasion\",\r\n    \"other\": \"Additional notes\",\r\n    \"birthday\": true,\r\n    \"sevenday\": false,\r\n    \"warming\": true,\r\n    \"threemonths\": false,\r\n    \"oneyear\": true,\r\n    \"annually\": false,\r\n    \"weddings\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
-									"raw": "{{url-l}}api/edit-dana-at-home-request/1",
+									"raw": "{{url-l}}api/edit-dana-at-home-request/2",
 									"host": [
 										"{{url-l}}api"
 									],
 									"path": [
 										"edit-dana-at-home-request",
-										"1"
+										"2"
 									]
 								}
 							},
@@ -1213,6 +1260,44 @@
 									"path": [
 										"delete-dana-at-home-request",
 										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Status Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{authToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\": \"Approved\",\r\n    \"status_reason\": \"Approved the request\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url-l}}api/dana-at-home-request/2/status",
+									"host": [
+										"{{url-l}}api"
+									],
+									"path": [
+										"dana-at-home-request",
+										"2",
+										"status"
 									]
 								}
 							},
@@ -1293,14 +1378,23 @@
 								},
 								"method": "PUT",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"first_name\": \"John\",\r\n    \"last_name\": \"Doe\",\r\n    \"mobile_number\": \"1234567890\",\r\n    \"wt_number\": \"WT12345\",\r\n    \"email\": \"john.doe@example.com\",\r\n    \"dana_for_lunch\": true,\r\n    \"dana_for_morning\": false,\r\n    \"dana_event_date\": \"2024-12-31\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
-									"raw": "{{url-l}}api/edit-dana-payment-request/1",
+									"raw": "{{url-l}}api/edit-dana-payment-request/2",
 									"host": [
 										"{{url-l}}api"
 									],
 									"path": [
 										"edit-dana-payment-request",
-										"1"
+										"2"
 									]
 								}
 							},
@@ -1329,6 +1423,44 @@
 									"path": [
 										"delete-dana-payment-request",
 										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Status Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{authToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\": \"Approved\",\r\n    \"status_reason\": \"Approved the request\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url-l}}api/dana-payment-request/2/status",
+									"host": [
+										"{{url-l}}api"
+									],
+									"path": [
+										"dana-payment-request",
+										"2",
+										"status"
 									]
 								}
 							},
@@ -1411,7 +1543,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Doe Updated\",\r\n    \"mobileNumber\": \"0771234567\",\r\n    \"wtNumber\": \"WT123\",\r\n    \"email\": \"john.doe.updated@example.com\",\r\n    \"date\": \"2023-12-25\"\r\n}",
+									"raw": "{\r\n    \"first_name\": \"John\",\r\n    \"last_name\": \"Doe Updated\",\r\n    \"mobile_number\": \"0771234567\",\r\n    \"wt_number\": \"WT123\",\r\n    \"email\": \"john.doe.updated@example.com\",\r\n    \"dana_event_date\": \"2023-12-25\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1419,13 +1551,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{url-l}}api/edit-dana-request/1",
+									"raw": "{{url-l}}api/edit-dana-request/2",
 									"host": [
 										"{{url-l}}api"
 									],
 									"path": [
 										"edit-dana-request",
-										"1"
+										"2"
 									]
 								}
 							},
@@ -1454,6 +1586,44 @@
 									"path": [
 										"delete-dana-request",
 										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Status Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{authToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\": \"Approved\",\r\n    \"status_reason\": \"Approved the request\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url-l}}api/dana-request/2/status",
+									"host": [
+										"{{url-l}}api"
+									],
+									"path": [
+										"dana-request",
+										"2",
+										"status"
 									]
 								}
 							},
@@ -1536,7 +1706,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Doe Updated\",\r\n    \"mobileNumber\": \"0771234567\",\r\n    \"wtNumber\": \"WT123\",\r\n    \"email\": \"john.doe.updated@example.com\",\r\n    \"number_of_people\": 10\r\n}",
+									"raw": "{\r\n    \"first_name\": \"John\",\r\n    \"last_name\": \"Doe Updated\",\r\n    \"mobile_number\": \"0771234567\",\r\n    \"wt_number\": \"WT123\",\r\n    \"email\": \"john.doe.updated@example.com\",\r\n    \"number_of_people\": 10\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1544,13 +1714,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{url-l}}api/edit-external-retreat-request-gw/1",
+									"raw": "{{url-l}}api/edit-external-retreat-request-gw/2",
 									"host": [
 										"{{url-l}}api"
 									],
 									"path": [
 										"edit-external-retreat-request-gw",
-										"1"
+										"2"
 									]
 								}
 							},
@@ -1579,6 +1749,44 @@
 									"path": [
 										"delete-external-retreat-request-gw",
 										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Status Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{authToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\": \"Approved\",\r\n    \"status_reason\": \"Approved the request\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url-l}}api/external-retreat-request-gw/2/status",
+									"host": [
+										"{{url-l}}api"
+									],
+									"path": [
+										"external-retreat-request-gw",
+										"2",
+										"status"
 									]
 								}
 							},
@@ -1661,7 +1869,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Doe Updated\",\r\n    \"mobileNumber\": \"0771234567\",\r\n    \"wtNumber\": \"WT123\",\r\n    \"email\": \"john.doe.updated@example.com\",\r\n    \"date\": \"2023-12-26\"\r\n}",
+									"raw": "{\r\n    \"first_name\": \"John\",\r\n    \"last_name\": \"Doe Updated\",\r\n    \"mobile_number\": \"0771234567\",\r\n    \"wt_number\": \"WT123\",\r\n    \"email\": \"john.doe.updated@example.com\",\r\n    \"date\": \"2023-12-26\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1669,13 +1877,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{url-l}}api/edit-external-retreat-hallam-request/1",
+									"raw": "{{url-l}}api/edit-external-retreat-hallam-request/2",
 									"host": [
 										"{{url-l}}api"
 									],
 									"path": [
 										"edit-external-retreat-hallam-request",
-										"1"
+										"2"
 									]
 								}
 							},
@@ -1704,6 +1912,44 @@
 									"path": [
 										"delete-external-retreat-hallam-request",
 										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Status Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{authToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\": \"Approved\",\r\n    \"status_reason\": \"Approved the request\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url-l}}api/external-retreat-hallam-request/2/status",
+									"host": [
+										"{{url-l}}api"
+									],
+									"path": [
+										"external-retreat-hallam-request",
+										"2",
+										"status"
 									]
 								}
 							},
@@ -1786,7 +2032,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Doe Updated\",\r\n    \"mobileNumber\": \"0771234567\",\r\n    \"wtNumber\": \"WT123\",\r\n    \"email\": \"john.doe.updated@example.com\",\r\n    \"number_of_people\": 10\r\n}",
+									"raw": "{\r\n    \"first_name\": \"John\",\r\n    \"last_name\": \"Doe Updated\",\r\n    \"mobile_number\": \"0771234567\",\r\n    \"wt_number\": \"WT123\",\r\n    \"email\": \"john.doe.updated@example.com\",\r\n    \"number_of_people\": 10\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1794,13 +2040,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{url-l}}api/edit-external-retreat-packenham-request/1",
+									"raw": "{{url-l}}api/edit-external-retreat-packenham-request/2",
 									"host": [
 										"{{url-l}}api"
 									],
 									"path": [
 										"edit-external-retreat-packenham-request",
-										"1"
+										"2"
 									]
 								}
 							},
@@ -1829,6 +2075,44 @@
 									"path": [
 										"delete-external-retreat-packenham-request",
 										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Status Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{authToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\": \"Approved\",\r\n    \"status_reason\": \"Approved the request\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url-l}}api/external-retreat-packenham-request/2/status",
+									"host": [
+										"{{url-l}}api"
+									],
+									"path": [
+										"external-retreat-packenham-request",
+										"2",
+										"status"
 									]
 								}
 							},
@@ -1911,7 +2195,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Doe Updated\",\r\n    \"address\": \"123 Main St Updated\",\r\n    \"city\": \"Melbourne\",\r\n    \"postal_code\": \"3000\",\r\n    \"mobile_number\": \"0771234567\",\r\n    \"wt_number\": \"WT123\",\r\n    \"email\": \"john.doe.updated@example.com\",\r\n    \"contribute\": \"I want to contribute with my time\",\r\n    \"inquire\": \"Looking for volunteer opportunities\"\r\n}",
+									"raw": "{\r\n    \"first_name\": \"John\",\r\n    \"last_name\": \"Doe\",\r\n    \"address\": \"123 Main St\",\r\n    \"city\": \"New York\",\r\n    \"postal_code\": \"10001\",\r\n    \"mobile_number\": \"1234567890\",\r\n    \"wt_number\": \"WT12345\",\r\n    \"email\": \"john.doe@example.com\",\r\n    \"contribute\": \"I want to contribute to future projects\",\r\n    \"inquire\": \"I have questions about upcoming plans\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1919,13 +2203,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{url-l}}api/edit-future-plans-request/1",
+									"raw": "{{url-l}}api/edit-future-plans-request/2",
 									"host": [
 										"{{url-l}}api"
 									],
 									"path": [
 										"edit-future-plans-request",
-										"1"
+										"2"
 									]
 								}
 							},
@@ -1954,6 +2238,44 @@
 									"path": [
 										"delete-future-plans-request",
 										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Status Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{authToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\": \"Approved\",\r\n    \"status_reason\": \"Approved the request\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url-l}}api/future-plans-request/2/status",
+									"host": [
+										"{{url-l}}api"
+									],
+									"path": [
+										"future-plans-request",
+										"2",
+										"status"
 									]
 								}
 							},
@@ -2044,13 +2366,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{url-l}}api/edit-five-year-request/1",
+									"raw": "{{url-l}}api/edit-five-year-request/2",
 									"host": [
 										"{{url-l}}api"
 									],
 									"path": [
 										"edit-five-year-request",
-										"1"
+										"2"
 									]
 								}
 							},
@@ -2079,6 +2401,44 @@
 									"path": [
 										"delete-five-year-request",
 										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Status Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{authToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\": \"Approved\",\r\n    \"status_reason\": \"Approved the request\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url-l}}api/five-year-request/2/status",
+									"host": [
+										"{{url-l}}api"
+									],
+									"path": [
+										"five-year-request",
+										"2",
+										"status"
 									]
 								}
 							},
@@ -2161,7 +2521,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Doe Updated\",\r\n    \"mobileNumber\": \"0771234567\",\r\n    \"wtNumber\": \"WT123\",\r\n    \"email\": \"john.doe.updated@example.com\",\r\n    \"date\": \"2023-12-26\"\r\n}",
+									"raw": "{\r\n    \"first_name\": \"John\",\r\n    \"last_name\": \"Doe Updated\",\r\n    \"mobile_number\": \"0771234567\",\r\n    \"wt_number\": \"WT123\",\r\n    \"email\": \"john.doe.updated@example.com\",\r\n    \"date\": \"2023-12-26\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2169,13 +2529,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{url-l}}api/edit-gilan-pasa-request/1",
+									"raw": "{{url-l}}api/edit-gilan-pasa-request/2",
 									"host": [
 										"{{url-l}}api"
 									],
 									"path": [
 										"edit-gilan-pasa-request",
-										"1"
+										"2"
 									]
 								}
 							},
@@ -2204,6 +2564,44 @@
 									"path": [
 										"delete-gilan-pasa-request",
 										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Status Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{authToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\": \"Approved\",\r\n    \"status_reason\": \"Approved the request\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url-l}}api/gilan-pasa-request/2/status",
+									"host": [
+										"{{url-l}}api"
+									],
+									"path": [
+										"gilan-pasa-request",
+										"2",
+										"status"
 									]
 								}
 							},
@@ -2315,6 +2713,42 @@
 							],
 							"path": [
 								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADMIN AUDIT LOG",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url-l}}api/admin/audit-logs",
+							"host": [
+								"{{url-l}}api"
+							],
+							"path": [
+								"admin",
+								"audit-logs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USER AUDIT LOG",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url-l}}api/user/audit-logs",
+							"host": [
+								"{{url-l}}api"
+							],
+							"path": [
+								"user",
+								"audit-logs"
 							]
 						}
 					},
