@@ -4,12 +4,14 @@ use App\Http\Controllers\AuditAdminLogController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DanaPaymentRequestController;
 use App\Http\Controllers\DanaRequestController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\ExternalRetreatHallamController;
 use App\Http\Controllers\ExternalRetreatPackenhamController;
 use App\Http\Controllers\ExternalRetreatRequestFormGlenWaverleyController;
 use App\Http\Controllers\FiveYearRequestController;
 use App\Http\Controllers\FuturePlansRequestFormController;
 use App\Http\Controllers\GilanPasaRequestController;
+use App\Http\Controllers\KatinaCeremonyRequestFormController;
 use App\Http\Controllers\SermonRequestController;
 use App\Http\Controllers\DanaAtHomeController;
 use App\Http\Controllers\UserController;
@@ -183,3 +185,30 @@ Route::post('/five_year-request', [FiveYearRequestController::class, 'store']);
 //Gilan Pasa Request Form
 Route::post('/gilanpasa-request', [GilanPasaRequestController::class, 'store']);
 
+
+// Event routes
+Route::apiResource('events', EventController::class);
+Route::post('events/{id}/restore', [EventController::class, 'restore'])->name('events.restore');
+Route::get('events-list/with-trashed', [EventController::class, 'indexWithTrashed'])->name('events.with-trashed');
+
+
+
+Route::prefix('katina-ceremony-requests')->group(function () {
+    // Get all forms
+    Route::get('/', [KatinaCeremonyRequestFormController::class, 'index']);
+
+    // Create new form
+    Route::post('/', [KatinaCeremonyRequestFormController::class, 'store']);
+
+    // Get single form
+    Route::get('/{id}', [KatinaCeremonyRequestFormController::class, 'show']);
+
+    // Update form
+    Route::put('/{id}', [KatinaCeremonyRequestFormController::class, 'update']);
+
+    // Delete form
+    Route::delete('/{id}', [KatinaCeremonyRequestFormController::class, 'destroy']);
+
+    // Update status only
+    Route::patch('/{id}/status', [KatinaCeremonyRequestFormController::class, 'updateStatus']);
+});
