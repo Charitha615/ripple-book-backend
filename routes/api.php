@@ -15,6 +15,8 @@ use App\Http\Controllers\InternalRetreatOrganiserRegistrationController;
 use App\Http\Controllers\KatinaCeremonyRequestFormController;
 use App\Http\Controllers\SermonRequestController;
 use App\Http\Controllers\DanaAtHomeController;
+use App\Http\Controllers\SoloRetreatController;
+use App\Http\Controllers\SoloRetreatRegistrationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserLogController;
 use Illuminate\Http\Request;
@@ -233,3 +235,14 @@ Route::prefix('internal-retreat-organiser-registrations')->group(function () {
     // Update status only
     Route::patch('/{id}/status', [InternalRetreatOrganiserRegistrationController::class, 'updateStatus']);
 });
+
+
+Route::apiResource('solo-retreat-registrations', SoloRetreatRegistrationController::class);
+Route::patch('solo-retreat-registrations/{id}/status', [SoloRetreatRegistrationController::class, 'updateStatus']);
+Route::get('solo-retreat-registrations/status/{status}', [SoloRetreatRegistrationController::class, 'getByStatus']);
+
+
+Route::apiResource('solo-retreats', SoloRetreatController::class);
+Route::patch('solo-retreats/{id}/status', [SoloRetreatController::class, 'updateStatus']);
+Route::get('solo-retreats/status/{status}', [SoloRetreatController::class, 'getByStatus']);
+Route::get('solo-retreats/stats', [SoloRetreatController::class, 'getStats']);
