@@ -11,6 +11,7 @@ use App\Http\Controllers\ExternalRetreatRequestFormGlenWaverleyController;
 use App\Http\Controllers\FiveYearRequestController;
 use App\Http\Controllers\FuturePlansRequestFormController;
 use App\Http\Controllers\GilanPasaRequestController;
+use App\Http\Controllers\GuestSpeakerRequestController;
 use App\Http\Controllers\InternalRetreatOrganiserRegistrationController;
 use App\Http\Controllers\KatinaCeremonyRequestFormController;
 use App\Http\Controllers\SermonRequestController;
@@ -246,3 +247,9 @@ Route::apiResource('solo-retreats', SoloRetreatController::class);
 Route::patch('solo-retreats/{id}/status', [SoloRetreatController::class, 'updateStatus']);
 Route::get('solo-retreats/status/{status}', [SoloRetreatController::class, 'getByStatus']);
 Route::get('solo-retreats/stats', [SoloRetreatController::class, 'getStats']);
+
+
+Route::apiResource('guest-speaker-requests', GuestSpeakerRequestController::class);
+Route::patch('guest-speaker-requests/{id}/status', [GuestSpeakerRequestController::class, 'updateStatus']);
+Route::get('guest-speaker-requests/status/{status}', [GuestSpeakerRequestController::class, 'getByStatus']);
+Route::get('guest-speaker-requests/stats', [GuestSpeakerRequestController::class, 'getStats']);
