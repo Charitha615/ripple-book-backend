@@ -11,6 +11,7 @@ use App\Http\Controllers\ExternalRetreatRequestFormGlenWaverleyController;
 use App\Http\Controllers\FiveYearRequestController;
 use App\Http\Controllers\FuturePlansRequestFormController;
 use App\Http\Controllers\GilanPasaRequestController;
+use App\Http\Controllers\InternalRetreatOrganiserRegistrationController;
 use App\Http\Controllers\KatinaCeremonyRequestFormController;
 use App\Http\Controllers\SermonRequestController;
 use App\Http\Controllers\DanaAtHomeController;
@@ -211,4 +212,24 @@ Route::prefix('katina-ceremony-requests')->group(function () {
 
     // Update status only
     Route::patch('/{id}/status', [KatinaCeremonyRequestFormController::class, 'updateStatus']);
+});
+
+Route::prefix('internal-retreat-organiser-registrations')->group(function () {
+    // Get all registrations
+    Route::get('/', [InternalRetreatOrganiserRegistrationController::class, 'index']);
+
+    // Create new registration
+    Route::post('/', [InternalRetreatOrganiserRegistrationController::class, 'store']);
+
+    // Get single registration
+    Route::get('/{id}', [InternalRetreatOrganiserRegistrationController::class, 'show']);
+
+    // Update registration
+    Route::put('/{id}', [InternalRetreatOrganiserRegistrationController::class, 'update']);
+
+    // Delete registration
+    Route::delete('/{id}', [InternalRetreatOrganiserRegistrationController::class, 'destroy']);
+
+    // Update status only
+    Route::patch('/{id}/status', [InternalRetreatOrganiserRegistrationController::class, 'updateStatus']);
 });
