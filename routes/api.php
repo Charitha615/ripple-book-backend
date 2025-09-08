@@ -4,6 +4,7 @@ use App\Http\Controllers\AuditAdminLogController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DanaPaymentRequestController;
 use App\Http\Controllers\DanaRequestController;
+use App\Http\Controllers\DhammaTalkController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ExternalRetreatHallamController;
 use App\Http\Controllers\ExternalRetreatPackenhamController;
@@ -196,60 +197,131 @@ Route::post('events/{id}/restore', [EventController::class, 'restore'])->name('e
 Route::get('events-list/with-trashed', [EventController::class, 'indexWithTrashed'])->name('events.with-trashed');
 
 
+// Get all forms
+Route::get('get-katina-ceremony-requests', [KatinaCeremonyRequestFormController::class, 'index']);
 
-Route::prefix('katina-ceremony-requests')->group(function () {
-    // Get all forms
-    Route::get('/', [KatinaCeremonyRequestFormController::class, 'index']);
+// Create new form
+Route::post('create-katina-ceremony-requests', [KatinaCeremonyRequestFormController::class, 'store']);
 
-    // Create new form
-    Route::post('/', [KatinaCeremonyRequestFormController::class, 'store']);
+// Get single form
+Route::get('get-katina-ceremony-requests/{id}', [KatinaCeremonyRequestFormController::class, 'show']);
 
-    // Get single form
-    Route::get('/{id}', [KatinaCeremonyRequestFormController::class, 'show']);
+// Update form
+Route::put('update-katina-ceremony-requests/{id}', [KatinaCeremonyRequestFormController::class, 'update']);
 
-    // Update form
-    Route::put('/{id}', [KatinaCeremonyRequestFormController::class, 'update']);
+// Delete form
+Route::delete('delete-katina-ceremony-requests/{id}', [KatinaCeremonyRequestFormController::class, 'destroy']);
 
-    // Delete form
-    Route::delete('/{id}', [KatinaCeremonyRequestFormController::class, 'destroy']);
-
-    // Update status only
-    Route::patch('/{id}/status', [KatinaCeremonyRequestFormController::class, 'updateStatus']);
-});
-
-Route::prefix('internal-retreat-organiser-registrations')->group(function () {
-    // Get all registrations
-    Route::get('/', [InternalRetreatOrganiserRegistrationController::class, 'index']);
-
-    // Create new registration
-    Route::post('/', [InternalRetreatOrganiserRegistrationController::class, 'store']);
-
-    // Get single registration
-    Route::get('/{id}', [InternalRetreatOrganiserRegistrationController::class, 'show']);
-
-    // Update registration
-    Route::put('/{id}', [InternalRetreatOrganiserRegistrationController::class, 'update']);
-
-    // Delete registration
-    Route::delete('/{id}', [InternalRetreatOrganiserRegistrationController::class, 'destroy']);
-
-    // Update status only
-    Route::patch('/{id}/status', [InternalRetreatOrganiserRegistrationController::class, 'updateStatus']);
-});
+// Update status only
+Route::patch('katina-ceremony-requests/{id}/status', [KatinaCeremonyRequestFormController::class, 'updateStatus']);
 
 
-Route::apiResource('solo-retreat-registrations', SoloRetreatRegistrationController::class);
+// Get all registrations
+Route::get('get-internal-retreat-organiser-registrations', [InternalRetreatOrganiserRegistrationController::class, 'index']);
+
+// Create new registration
+Route::post('create-internal-retreat-organiser-registrations', [InternalRetreatOrganiserRegistrationController::class, 'store']);
+
+// Get single registration
+Route::get('get-internal-retreat-organiser-registrations/{id}', [InternalRetreatOrganiserRegistrationController::class, 'show']);
+
+// Update registration
+Route::put('update-internal-retreat-organiser-registrations/{id}', [InternalRetreatOrganiserRegistrationController::class, 'update']);
+
+// Delete registration
+Route::delete('delete-internal-retreat-organiser-registrations/{id}', [InternalRetreatOrganiserRegistrationController::class, 'destroy']);
+
+// Update status only
+Route::patch('internal-retreat-organiser-registrations/{id}/status', [InternalRetreatOrganiserRegistrationController::class, 'updateStatus']);
+
+
+//Route::apiResource('solo-retreat-registrations', SoloRetreatRegistrationController::class);
+//Route::patch('solo-retreat-registrations/{id}/status', [SoloRetreatRegistrationController::class, 'updateStatus']);
+//Route::get('solo-retreat-registrations/status/{status}', [SoloRetreatRegistrationController::class, 'getByStatus']);
+
+// Get all registrations
+Route::get('get-solo-retreat-registrations', [SoloRetreatRegistrationController::class, 'index']);
+
+// Create new registration
+Route::post('create-solo-retreat-registrations', [SoloRetreatRegistrationController::class, 'store']);
+
+// Get single registration
+Route::get('get-solo-retreat-registrations/{id}', [SoloRetreatRegistrationController::class, 'show']);
+
+// Update registration
+Route::put('update-solo-retreat-registrations/{id}', [SoloRetreatRegistrationController::class, 'update']);
+
+// Delete registration
+Route::delete('delete-solo-retreat-registrations/{id}', [SoloRetreatRegistrationController::class, 'destroy']);
+
+// Update status only
 Route::patch('solo-retreat-registrations/{id}/status', [SoloRetreatRegistrationController::class, 'updateStatus']);
-Route::get('solo-retreat-registrations/status/{status}', [SoloRetreatRegistrationController::class, 'getByStatus']);
+
+// Get by status
+Route::get('get-solo-retreat-registrations/status/{status}', [SoloRetreatRegistrationController::class, 'getByStatus']);
 
 
-Route::apiResource('solo-retreats', SoloRetreatController::class);
+//Route::apiResource('solo-retreats', SoloRetreatController::class);
+//Route::patch('solo-retreats/{id}/status', [SoloRetreatController::class, 'updateStatus']);
+//Route::get('solo-retreats/status/{status}', [SoloRetreatController::class, 'getByStatus']);
+//Route::get('solo-retreats/stats', [SoloRetreatController::class, 'getStats']);
+
+
+// Get all retreats
+Route::get('get-solo-retreats', [SoloRetreatController::class, 'index']);
+
+// Create new retreat
+Route::post('create-solo-retreats', [SoloRetreatController::class, 'store']);
+
+// Get single retreat
+Route::get('get-solo-retreats/{id}', [SoloRetreatController::class, 'show']);
+
+// Update retreat
+Route::put('update-solo-retreats/{id}', [SoloRetreatController::class, 'update']);
+
+// Delete retreat
+Route::delete('delete-solo-retreats/{id}', [SoloRetreatController::class, 'destroy']);
+
+// Update status only
 Route::patch('solo-retreats/{id}/status', [SoloRetreatController::class, 'updateStatus']);
-Route::get('solo-retreats/status/{status}', [SoloRetreatController::class, 'getByStatus']);
-Route::get('solo-retreats/stats', [SoloRetreatController::class, 'getStats']);
+
+// Get by status
+Route::get('get-solo-retreats/status/{status}', [SoloRetreatController::class, 'getByStatus']);
+
+// Get stats
+Route::get('get-solo-retreats/stats', [SoloRetreatController::class, 'getStats']);
 
 
-Route::apiResource('guest-speaker-requests', GuestSpeakerRequestController::class);
+//Route::apiResource('guest-speaker-requests', GuestSpeakerRequestController::class);
+//Route::patch('guest-speaker-requests/{id}/status', [GuestSpeakerRequestController::class, 'updateStatus']);
+//Route::get('guest-speaker-requests/status/{status}', [GuestSpeakerRequestController::class, 'getByStatus']);
+//Route::get('guest-speaker-requests/stats', [GuestSpeakerRequestController::class, 'getStats']);
+
+// Get all requests
+Route::get('get-guest-speaker-requests', [GuestSpeakerRequestController::class, 'index']);
+
+// Create new request
+Route::post('create-guest-speaker-requests', [GuestSpeakerRequestController::class, 'store']);
+
+// Get single request
+Route::get('get-guest-speaker-requests/{id}', [GuestSpeakerRequestController::class, 'show']);
+
+// Update request
+Route::put('update-guest-speaker-requests/{id}', [GuestSpeakerRequestController::class, 'update']);
+
+// Delete request
+Route::delete('delete-guest-speaker-requests/{id}', [GuestSpeakerRequestController::class, 'destroy']);
+
+// Update status only
 Route::patch('guest-speaker-requests/{id}/status', [GuestSpeakerRequestController::class, 'updateStatus']);
-Route::get('guest-speaker-requests/status/{status}', [GuestSpeakerRequestController::class, 'getByStatus']);
-Route::get('guest-speaker-requests/stats', [GuestSpeakerRequestController::class, 'getStats']);
+
+// Get by status
+Route::get('get-guest-speaker-requests/status/{status}', [GuestSpeakerRequestController::class, 'getByStatus']);
+
+// Get stats
+Route::get('get-guest-speaker-requests/stats', [GuestSpeakerRequestController::class, 'getStats']);
+
+
+// Dhamma Talks
+Route::apiResource('dhamma-talks', DhammaTalkController::class);
+Route::get('dhamma-talks/search', [DhammaTalkController::class, 'search']);
