@@ -23,7 +23,8 @@ class Event extends Model
         'tags',
         'url',
         'other_details',
-        'admin_id'
+        'admin_id',
+        'is_visible'
     ];
 
     protected $casts = [
