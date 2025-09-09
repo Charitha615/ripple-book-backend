@@ -15,6 +15,7 @@ use App\Http\Controllers\GilanPasaRequestController;
 use App\Http\Controllers\GuestSpeakerRequestController;
 use App\Http\Controllers\InternalRetreatOrganiserRegistrationController;
 use App\Http\Controllers\KatinaCeremonyRequestFormController;
+use App\Http\Controllers\ParittaAtHomeRequestFormController;
 use App\Http\Controllers\SermonRequestController;
 use App\Http\Controllers\DanaAtHomeController;
 use App\Http\Controllers\SoloRetreatController;
@@ -205,6 +206,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('events/{id}', [EventController::class, 'update']);
     Route::delete('events/{id}', [EventController::class, 'destroy']);
     Route::post('events/{id}/restore', [EventController::class, 'restore']);
+
+
+    Route::put('edit-paritta-at-home-requests/{id}', [ParittaAtHomeRequestFormController::class, 'apiUpdate']);
+    Route::patch('edit-paritta-at-home-requests/{id}/status', [ParittaAtHomeRequestFormController::class, 'apiUpdateStatus']);
+    Route::delete('delete-paritta-at-home-requests/{id}', [ParittaAtHomeRequestFormController::class, 'apiDestroy']);
 });
 
 
@@ -337,6 +343,11 @@ Route::get('dhamma-talks/{id}', [DhammaTalkController::class, 'show']);
 Route::put('dhamma-talks/{id}', [DhammaTalkController::class, 'update']);
 Route::delete('dhamma-talks/{id}', [DhammaTalkController::class, 'destroy']);
 Route::get('dhamma-talks/search', [DhammaTalkController::class, 'search']);
+
+
+Route::get('get-paritta-at-home-requests/', [ParittaAtHomeRequestFormController::class, 'apiIndex']);
+Route::get('get-paritta-at-home-requests/{id}', [ParittaAtHomeRequestFormController::class, 'apiShow']);
+Route::post('create-paritta-at-home-requests/', [ParittaAtHomeRequestFormController::class, 'apiStore']);
 
 
 //
