@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('url')->nullable();
             $table->text('other_details')->nullable();
             $table->foreignId('admin_id')->constrained('users')->onDelete('cascade');
+            $table->boolean('is_visible')->default(true);
             $table->softDeletes();
             $table->timestamps();
         });

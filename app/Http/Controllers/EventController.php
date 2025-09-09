@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -49,7 +50,8 @@ class EventController extends Controller
             'tags' => 'nullable|string|max:255',
             'url' => 'nullable|url',
             'other_details' => 'nullable|string',
-            'admin_id' => 'required|exists:users,id'
+            'admin_id' => 'required|exists:users,id',
+            'is_visible' => 'nullable|boolean'
         ]);
 
         if ($validator->fails()) {
@@ -64,12 +66,27 @@ class EventController extends Controller
             $event = new Event();
             $event->fill($request->except('images'));
 
+            // Set default value if not provided (optional)
+            if (!$request->has('is_visible')) {
+                $event->is_visible = true; // Default to visible
+            }
+
             // Process and store images if provided
             if ($request->has('images') && !empty($request->images)) {
                 $event->images = $event->processAndStoreImages($request->images);
             }
 
             $event->save();
+
+            // Log to AuditAdminLog
+            AuditAdminLogController::createLog([
+                'user_id' => Auth::id(),
+                'action_type' => 'Create',
+                'entity_area' => 'Events',
+                'description' => "Created new event: {$event->title} (ID: {$event->id})",
+                'old_values' => json_encode(null),
+                'new_values' => json_encode($event->toArray()),
+            ]);
 
             return response()->json([
                 'success' => true,
@@ -132,7 +149,8 @@ class EventController extends Controller
             'tags' => 'nullable|string|max:255',
             'url' => 'nullable|url',
             'other_details' => 'nullable|string',
-            'admin_id' => 'sometimes|exists:users,id'
+            'admin_id' => 'sometimes|exists:users,id',
+            'is_visible' => 'nullable|boolean'
         ]);
 
         if ($validator->fails()) {
@@ -153,6 +171,8 @@ class EventController extends Controller
                 ], 404);
             }
 
+            $oldValues = $event->toArray();
+
             $event->fill($request->except('images'));
 
             // Process and store new images if provided
@@ -170,6 +190,16 @@ class EventController extends Controller
             }
 
             $event->save();
+
+            // Log to AuditAdminLog
+            AuditAdminLogController::createLog([
+                'user_id' => Auth::id(),
+                'action_type' => 'Update',
+                'entity_area' => 'Events',
+                'description' => "Updated event: {$event->title} (ID: {$event->id})",
+                'old_values' => json_encode($oldValues),
+                'new_values' => json_encode($event->toArray()),
+            ]);
 
             return response()->json([
                 'success' => true,
@@ -200,7 +230,19 @@ class EventController extends Controller
                 ], 404);
             }
 
+            $oldValues = $event->toArray();
+
             $event->delete();
+
+            // Log to AuditAdminLog
+            AuditAdminLogController::createLog([
+                'user_id' => Auth::id(),
+                'action_type' => 'Delete',
+                'entity_area' => 'Events',
+                'description' => "Deleted event: {$event->title} (ID: {$event->id})",
+                'old_values' => json_encode($oldValues),
+                'new_values' => json_encode(null),
+            ]);
 
             return response()->json([
                 'success' => true,
@@ -237,7 +279,19 @@ class EventController extends Controller
                 ], 400);
             }
 
+            $oldValues = $event->toArray();
+
             $event->restore();
+
+            // Log to AuditAdminLog
+            AuditAdminLogController::createLog([
+                'user_id' => Auth::id(),
+                'action_type' => 'Restore',
+                'entity_area' => 'Events',
+                'description' => "Restored event: {$event->title} (ID: {$event->id})",
+                'old_values' => json_encode($oldValues),
+                'new_values' => json_encode($event->toArray()),
+            ]);
 
             return response()->json([
                 'success' => true,
