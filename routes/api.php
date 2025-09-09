@@ -4,6 +4,7 @@ use App\Http\Controllers\AuditAdminLogController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DanaPaymentRequestController;
 use App\Http\Controllers\DanaRequestController;
+use App\Http\Controllers\DhammaSermonRequestController;
 use App\Http\Controllers\DhammaTalkController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ExternalRetreatHallamController;
@@ -211,6 +212,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('edit-paritta-at-home-requests/{id}', [ParittaAtHomeRequestFormController::class, 'apiUpdate']);
     Route::patch('edit-paritta-at-home-requests/{id}/status', [ParittaAtHomeRequestFormController::class, 'apiUpdateStatus']);
     Route::delete('delete-paritta-at-home-requests/{id}', [ParittaAtHomeRequestFormController::class, 'apiDestroy']);
+
+
+    Route::put('edit-dhamma-sermon-requests/{id}', [DhammaSermonRequestController::class, 'apiUpdate']);
+    Route::patch('edit-dhamma-sermon-requests/{id}/status', [DhammaSermonRequestController::class, 'apiUpdateStatus']);
+    Route::delete('delete-dhamma-sermon-requests/{id}', [DhammaSermonRequestController::class, 'apiDestroy']);
 });
 
 
@@ -348,6 +354,12 @@ Route::get('dhamma-talks/search', [DhammaTalkController::class, 'search']);
 Route::get('get-paritta-at-home-requests/', [ParittaAtHomeRequestFormController::class, 'apiIndex']);
 Route::get('get-paritta-at-home-requests/{id}', [ParittaAtHomeRequestFormController::class, 'apiShow']);
 Route::post('create-paritta-at-home-requests/', [ParittaAtHomeRequestFormController::class, 'apiStore']);
+
+
+
+Route::get('get-dhamma-sermon-requests/', [DhammaSermonRequestController::class, 'apiIndex']);
+Route::get('get-dhamma-sermon-requests/{id}', [DhammaSermonRequestController::class, 'apiShow']);
+Route::post('create-dhamma-sermon-requests/', [DhammaSermonRequestController::class, 'apiStore']);
 
 
 //
