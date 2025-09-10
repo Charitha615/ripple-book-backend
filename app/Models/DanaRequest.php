@@ -21,6 +21,8 @@ class DanaRequest extends Model
         'ip_address',
         'status',
         'status_reason',
+        'is_breakfast',
+        'is_lunch'
     ];
 
     protected $dates = ['deleted_at'];
