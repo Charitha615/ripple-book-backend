@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\FormNotificationMail;
 use App\Models\DanaPaymentRequest;
+use App\Services\WhatsAppService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class DanaPaymentRequestController extends Controller
@@ -54,6 +57,27 @@ class DanaPaymentRequestController extends Controller
                     'request_data' => $validatedData
                 ]);
             }
+
+            try {
+                Mail::to($validatedData['email'])->send(
+                    new FormNotificationMail(
+                        "Dana Payment Request Submitted - Ref #{$danaPaymentRequest->id}",
+                        "Dear {$validatedData['firstName']},\n\nYour Dana Payment Request has been received successfully.\nReference No: {$danaPaymentRequest->id}\nWe will review it shortly."
+                    )
+                );
+            } catch (\Exception $mailEx) {
+                Log::error("Failed to send email: " . $mailEx->getMessage());
+            }
+
+            try {
+                WhatsAppService::sendMessage(
+                    $validatedData['mobileNumber'],
+                    "Hello {$validatedData['firstName']}, your Dana Payment Request has been received.\nReference No: {$danaPaymentRequest->id}"
+                );
+            } catch (\Exception $waEx) {
+                Log::error("Failed to send WhatsApp message: " . $waEx->getMessage());
+            }
+
 
             return response()->json([
                 'success' => true,
