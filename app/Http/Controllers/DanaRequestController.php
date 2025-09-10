@@ -22,6 +22,8 @@ class DanaRequestController extends Controller
                 'email' => 'required|email|max:255',
                 'date' => 'nullable|string|max:255',
                 'ip_address' => 'required|string|max:255',
+                'is_breakfast' => 'nullable|boolean',
+                'is_lunch' => 'nullable|boolean',
             ]);
 
             $danaRequest = DanaRequest::create([
@@ -32,6 +34,8 @@ class DanaRequestController extends Controller
                 'email' => $validatedData['email'],
                 'dana_event_date' => $validatedData['date'] ?? null,
                 'ip_address' => $validatedData['ip_address'],
+                'is_breakfast' => $validatedData['is_breakfast'] ?? false,
+                'is_lunch' => $validatedData['is_lunch'] ?? false,
             ]);
 
             try {
@@ -140,7 +144,9 @@ class DanaRequestController extends Controller
                 'mobile_number' => 'required|string|max:255',
                 'wt_number' => 'nullable|string|max:255',
                 'email' => 'required|email|max:255',
-                'dana_event_date' => 'nullable|string|max:255', // Changed from 'date' to match DB column
+                'dana_event_date' => 'nullable|string|max:255',
+                'is_breakfast' => 'nullable|boolean', // Add this
+                'is_lunch' => 'nullable|boolean',     // Add this
             ]);
 
             if ($validator->fails()) {
@@ -159,6 +165,8 @@ class DanaRequestController extends Controller
                 'wt_number' => $request->wt_number ?? null,
                 'email' => $request->email,
                 'dana_event_date' => $request->dana_event_date ?? null,
+                'is_breakfast' => $request->is_breakfast ?? false, // Add this
+                'is_lunch' => $request->is_lunch ?? false,         // Add this
             ]);
 
             // Create admin audit log
