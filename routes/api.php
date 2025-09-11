@@ -16,6 +16,7 @@ use App\Http\Controllers\GilanPasaRequestController;
 use App\Http\Controllers\GuestSpeakerRequestController;
 use App\Http\Controllers\InternalRetreatController;
 use App\Http\Controllers\InternalRetreatOrganiserRegistrationController;
+use App\Http\Controllers\InternalRetreatRequestController;
 use App\Http\Controllers\KatinaCeremonyRequestFormController;
 use App\Http\Controllers\ParittaAtHomeRequestFormController;
 use App\Http\Controllers\PirikaraRequestController;
@@ -233,6 +234,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
 // Delete a retreat
     Route::delete('/delete-internal-retreats/{id}', [InternalRetreatController::class, 'destroy']);
+
+    Route::put('/update-internal-retreat-requests/{id}', [InternalRetreatRequestController::class, 'update']);
+    Route::patch('/update-internal-retreat-requests/{id}/status', [InternalRetreatRequestController::class, 'updateStatus']);
+    Route::delete('/delete-internal-retreat-requests/{id}', [InternalRetreatRequestController::class, 'destroy']);
 });
 
 
@@ -388,3 +393,10 @@ Route::post('/delete-internal-retreats/bulk-delete', [InternalRetreatController:
 
 Route::get('/get-internal-retreats', [InternalRetreatController::class, 'index']);
 Route::get('/get-internal-retreats/{id}', [InternalRetreatController::class, 'show']);
+
+// Internal Retreat Request Routes
+
+Route::get('/get-internal-retreat-requests/', [InternalRetreatRequestController::class, 'index']);
+Route::post('/create-internal-retreat-requests/', [InternalRetreatRequestController::class, 'store']);
+Route::get('/get-internal-retreat-requests/{id}', [InternalRetreatRequestController::class, 'show']);
+
