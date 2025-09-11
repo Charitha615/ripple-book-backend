@@ -14,6 +14,7 @@ use App\Http\Controllers\FiveYearRequestController;
 use App\Http\Controllers\FuturePlansRequestFormController;
 use App\Http\Controllers\GilanPasaRequestController;
 use App\Http\Controllers\GuestSpeakerRequestController;
+use App\Http\Controllers\InternalRetreatController;
 use App\Http\Controllers\InternalRetreatOrganiserRegistrationController;
 use App\Http\Controllers\KatinaCeremonyRequestFormController;
 use App\Http\Controllers\ParittaAtHomeRequestFormController;
@@ -223,6 +224,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('update-pirikara-requests/{id}', [PirikaraRequestController::class, 'update']);
     Route::patch('update-pirikara-requests/{id}/status', [PirikaraRequestController::class, 'updateStatus']);
     Route::delete('delete-pirikara-requests/{id}', [PirikaraRequestController::class, 'destroy']);
+
+
+    Route::post('/create-internal-retreats', [InternalRetreatController::class, 'store']);
+
+// Update a retreat
+    Route::put('/update-internal-retreats/{id}', [InternalRetreatController::class, 'update']);
+
+// Delete a retreat
+    Route::delete('/delete-internal-retreats/{id}', [InternalRetreatController::class, 'destroy']);
 });
 
 
@@ -261,8 +271,6 @@ Route::post('/five_year-request', [FiveYearRequestController::class, 'store']);
 
 // Gilan Pasa
 Route::post('/gilanpasa-request', [GilanPasaRequestController::class, 'store']);
-
-
 
 
 /*
@@ -364,7 +372,6 @@ Route::get('get-paritta-at-home-requests/{id}', [ParittaAtHomeRequestFormControl
 Route::post('create-paritta-at-home-requests/', [ParittaAtHomeRequestFormController::class, 'apiStore']);
 
 
-
 Route::get('get-dhamma-sermon-requests/', [DhammaSermonRequestController::class, 'apiIndex']);
 Route::get('get-dhamma-sermon-requests/{id}', [DhammaSermonRequestController::class, 'apiShow']);
 Route::post('create-dhamma-sermon-requests/', [DhammaSermonRequestController::class, 'apiStore']);
@@ -375,3 +382,9 @@ Route::get('get-pirikara-requests', [PirikaraRequestController::class, 'index'])
 Route::get('get-pirikara-requests/{id}', [PirikaraRequestController::class, 'show']);
 
 
+// Bulk delete retreats
+Route::post('/delete-internal-retreats/bulk-delete', [InternalRetreatController::class, 'bulkDelete']);
+
+
+Route::get('/get-internal-retreats', [InternalRetreatController::class, 'index']);
+Route::get('/get-internal-retreats/{id}', [InternalRetreatController::class, 'show']);
