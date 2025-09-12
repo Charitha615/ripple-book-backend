@@ -21,6 +21,7 @@ use App\Http\Controllers\InternalRetreatRegistrationController;
 use App\Http\Controllers\InternalRetreatRequestController;
 use App\Http\Controllers\KatinaCeremonyRequestFormController;
 use App\Http\Controllers\OrdinationRegistrationController;
+use App\Http\Controllers\OrdinationRequestController;
 use App\Http\Controllers\ParittaAtHomeRequestFormController;
 use App\Http\Controllers\PirikaraRequestController;
 use App\Http\Controllers\SermonRequestController;
@@ -257,6 +258,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/update-ordination-registrations/{id}', [OrdinationRegistrationController::class, 'update']);
     Route::patch('/update-ordination-registrations/{id}/status', [OrdinationRegistrationController::class, 'updateStatus']);
     Route::delete('/delete-ordination-registrations/{id}', [OrdinationRegistrationController::class, 'destroy']);
+
+// Ordination Request Routes
+    Route::put('/update-ordination-requests/{id}', [OrdinationRequestController::class, 'update']);
+    Route::patch('/update-ordination-requests/{id}/status', [OrdinationRequestController::class, 'updateStatus']);
+    Route::delete('/delete-ordination-requests/{id}', [OrdinationRequestController::class, 'destroy']);
 });
 
 
@@ -434,3 +440,8 @@ Route::get('/get-guest-speaker-registrations/{id}', [GuestSpeakerRegistrationCon
 Route::get('/get-ordination-registrations/', [OrdinationRegistrationController::class, 'index']);
 Route::post('/create-ordination-registrations/', [OrdinationRegistrationController::class, 'store']);
 Route::get('/get-ordination-registrations/{id}', [OrdinationRegistrationController::class, 'show']);
+
+// Ordination Request Routes
+Route::get('/get-ordination-requests/', [OrdinationRequestController::class, 'index']);
+Route::post('/create-ordination-requests/', [OrdinationRequestController::class, 'store']);
+Route::get('/get-ordination-requests/{id}', [OrdinationRequestController::class, 'show']);
