@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\InternalRetreatRegistrationController;
 use App\Http\Controllers\AuditAdminLogController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DanaPaymentRequestController;
@@ -238,6 +239,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/update-internal-retreat-requests/{id}', [InternalRetreatRequestController::class, 'update']);
     Route::patch('/update-internal-retreat-requests/{id}/status', [InternalRetreatRequestController::class, 'updateStatus']);
     Route::delete('/delete-internal-retreat-requests/{id}', [InternalRetreatRequestController::class, 'destroy']);
+
+// Internal Retreat Registration Routes
+    Route::put('/update-internal-retreat-registrations/{id}', [InternalRetreatRegistrationController::class, 'update']);
+    Route::patch('/update-internal-retreat-registrations/{id}/status', [InternalRetreatRegistrationController::class, 'updateStatus']);
+    Route::delete('/delete-internal-retreat-registrations/{id}', [InternalRetreatRegistrationController::class, 'destroy']);
 });
 
 
@@ -399,4 +405,10 @@ Route::get('/get-internal-retreats/{id}', [InternalRetreatController::class, 'sh
 Route::get('/get-internal-retreat-requests/', [InternalRetreatRequestController::class, 'index']);
 Route::post('/create-internal-retreat-requests/', [InternalRetreatRequestController::class, 'store']);
 Route::get('/get-internal-retreat-requests/{id}', [InternalRetreatRequestController::class, 'show']);
+
+
+// Internal Retreat Registration Routes
+Route::get('/get-internal-retreat-registrations/', [InternalRetreatRegistrationController::class, 'index']);
+Route::post('/create-internal-retreat-registrations/', [InternalRetreatRegistrationController::class, 'store']);
+Route::get('/get-internal-retreat-registrations/{id}', [InternalRetreatRegistrationController::class, 'show']);
 
