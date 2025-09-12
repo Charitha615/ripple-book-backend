@@ -20,6 +20,7 @@ use App\Http\Controllers\InternalRetreatOrganiserRegistrationController;
 use App\Http\Controllers\InternalRetreatRegistrationController;
 use App\Http\Controllers\InternalRetreatRequestController;
 use App\Http\Controllers\KatinaCeremonyRequestFormController;
+use App\Http\Controllers\OrdinationRegistrationController;
 use App\Http\Controllers\ParittaAtHomeRequestFormController;
 use App\Http\Controllers\PirikaraRequestController;
 use App\Http\Controllers\SermonRequestController;
@@ -250,6 +251,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/update-guest-speaker-registrations/{id}', [GuestSpeakerRegistrationController::class, 'update']);
     Route::patch('/update-guest-speaker-registrations/{id}/status', [GuestSpeakerRegistrationController::class, 'updateStatus']);
     Route::delete('/delete-guest-speaker-registrations/{id}', [GuestSpeakerRegistrationController::class, 'destroy']);
+
+    // Ordination Registration Routes
+
+    Route::put('/update-ordination-registrations/{id}', [OrdinationRegistrationController::class, 'update']);
+    Route::patch('/update-ordination-registrations/{id}/status', [OrdinationRegistrationController::class, 'updateStatus']);
+    Route::delete('/delete-ordination-registrations/{id}', [OrdinationRegistrationController::class, 'destroy']);
 });
 
 
@@ -422,3 +429,8 @@ Route::get('/get-internal-retreat-registrations/{id}', [InternalRetreatRegistrat
 Route::get('/get-guest-speaker-registrations/', [GuestSpeakerRegistrationController::class, 'index']);
 Route::post('/create-guest-speaker-registrations/', [GuestSpeakerRegistrationController::class, 'store']);
 Route::get('/get-guest-speaker-registrations/{id}', [GuestSpeakerRegistrationController::class, 'show']);
+
+// Ordination Registration Routes
+Route::get('/get-ordination-registrations/', [OrdinationRegistrationController::class, 'index']);
+Route::post('/create-ordination-registrations/', [OrdinationRegistrationController::class, 'store']);
+Route::get('/get-ordination-registrations/{id}', [OrdinationRegistrationController::class, 'show']);
