@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\API\InternalRetreatRegistrationController;
 use App\Http\Controllers\AuditAdminLogController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DanaPaymentRequestController;
@@ -14,9 +13,11 @@ use App\Http\Controllers\ExternalRetreatRequestFormGlenWaverleyController;
 use App\Http\Controllers\FiveYearRequestController;
 use App\Http\Controllers\FuturePlansRequestFormController;
 use App\Http\Controllers\GilanPasaRequestController;
+use App\Http\Controllers\GuestSpeakerRegistrationController;
 use App\Http\Controllers\GuestSpeakerRequestController;
 use App\Http\Controllers\InternalRetreatController;
 use App\Http\Controllers\InternalRetreatOrganiserRegistrationController;
+use App\Http\Controllers\InternalRetreatRegistrationController;
 use App\Http\Controllers\InternalRetreatRequestController;
 use App\Http\Controllers\KatinaCeremonyRequestFormController;
 use App\Http\Controllers\ParittaAtHomeRequestFormController;
@@ -244,6 +245,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/update-internal-retreat-registrations/{id}', [InternalRetreatRegistrationController::class, 'update']);
     Route::patch('/update-internal-retreat-registrations/{id}/status', [InternalRetreatRegistrationController::class, 'updateStatus']);
     Route::delete('/delete-internal-retreat-registrations/{id}', [InternalRetreatRegistrationController::class, 'destroy']);
+
+// Guest Speaker Registration Routes
+    Route::put('/update-guest-speaker-registrations/{id}', [GuestSpeakerRegistrationController::class, 'update']);
+    Route::patch('/update-guest-speaker-registrations/{id}/status', [GuestSpeakerRegistrationController::class, 'updateStatus']);
+    Route::delete('/delete-guest-speaker-registrations/{id}', [GuestSpeakerRegistrationController::class, 'destroy']);
 });
 
 
@@ -412,3 +418,7 @@ Route::get('/get-internal-retreat-registrations/', [InternalRetreatRegistrationC
 Route::post('/create-internal-retreat-registrations/', [InternalRetreatRegistrationController::class, 'store']);
 Route::get('/get-internal-retreat-registrations/{id}', [InternalRetreatRegistrationController::class, 'show']);
 
+// Guest Speaker Registration Routes
+Route::get('/get-guest-speaker-registrations/', [GuestSpeakerRegistrationController::class, 'index']);
+Route::post('/create-guest-speaker-registrations/', [GuestSpeakerRegistrationController::class, 'store']);
+Route::get('/get-guest-speaker-registrations/{id}', [GuestSpeakerRegistrationController::class, 'show']);
