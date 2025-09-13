@@ -23,6 +23,7 @@ use App\Http\Controllers\InternalRetreatRegistrationController;
 use App\Http\Controllers\InternalRetreatRequestController;
 use App\Http\Controllers\KatinaCeremonyRequestFormController;
 use App\Http\Controllers\LandLotRequestController;
+use App\Http\Controllers\MaintenanceFundRequestController;
 use App\Http\Controllers\MaintenanceRequestController;
 use App\Http\Controllers\MembershipRequestController;
 use App\Http\Controllers\OngoingProjectRequestController;
@@ -300,7 +301,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/update-maintenance-requests/{id}/status', [MaintenanceRequestController::class, 'updateStatus']);
     Route::delete('/delete-maintenance-requests/{id}', [MaintenanceRequestController::class, 'destroy']);
 
-
+// Maintenance Fund Request Routes
+    Route::put('/update-maintenance-fund-requests/{id}', [MaintenanceRequestController::class, 'update']);
+    Route::patch('/update-maintenance-fund-requests/{id}/status', [MaintenanceRequestController::class, 'updateStatus']);
+    Route::delete('/delete-maintenance-fund-requests/{id}', [MaintenanceRequestController::class, 'destroy']);
 });
 
 
@@ -513,3 +517,8 @@ Route::get('/get-future-plans-requests/{id}', [FuturePlansRequestController::cla
 Route::get('/get-maintenance-requests/', [MaintenanceRequestController::class, 'index']);
 Route::post('/create-maintenance-requests/', [MaintenanceRequestController::class, 'store']);
 Route::get('/get-maintenance-requests/{id}', [MaintenanceRequestController::class, 'show']);
+
+// Maintenance Fund Request Routes
+Route::get('/get-maintenance-fund-requests/', [MaintenanceFundRequestController::class, 'index']);
+Route::post('/create-maintenance-fund-requests/', [MaintenanceFundRequestController::class, 'store']);
+Route::get('/get-maintenance-fund-requests/{id}', [MaintenanceFundRequestController::class, 'show']);
