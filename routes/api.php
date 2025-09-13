@@ -23,6 +23,7 @@ use App\Http\Controllers\InternalRetreatRegistrationController;
 use App\Http\Controllers\InternalRetreatRequestController;
 use App\Http\Controllers\KatinaCeremonyRequestFormController;
 use App\Http\Controllers\LandLotRequestController;
+use App\Http\Controllers\MaintenanceRequestController;
 use App\Http\Controllers\MembershipRequestController;
 use App\Http\Controllers\OngoingProjectRequestController;
 use App\Http\Controllers\OrdinationRegistrationController;
@@ -294,6 +295,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/update-future-plans-requests/{id}/status', [FuturePlansRequestController::class, 'updateStatus']);
     Route::delete('/delete-future-plans-requests/{id}', [FuturePlansRequestController::class, 'destroy']);
 
+// Maintenance Request Routes
+    Route::put('/update-maintenance-requests/{id}', [MaintenanceRequestController::class, 'update']);
+    Route::patch('/update-maintenance-requests/{id}/status', [MaintenanceRequestController::class, 'updateStatus']);
+    Route::delete('/delete-maintenance-requests/{id}', [MaintenanceRequestController::class, 'destroy']);
+
 
 });
 
@@ -502,3 +508,8 @@ Route::get('/get-ongoing-project-requests/{id}', [OngoingProjectRequestControlle
 Route::get('/get-future-plans-requests/', [FuturePlansRequestController::class, 'index']);
 Route::post('/create-future-plans-requests/', [FuturePlansRequestController::class, 'store']);
 Route::get('/get-future-plans-requests/{id}', [FuturePlansRequestController::class, 'show']);
+
+// Maintenance Request Routes
+Route::get('/get-maintenance-requests/', [MaintenanceRequestController::class, 'index']);
+Route::post('/create-maintenance-requests/', [MaintenanceRequestController::class, 'store']);
+Route::get('/get-maintenance-requests/{id}', [MaintenanceRequestController::class, 'show']);
