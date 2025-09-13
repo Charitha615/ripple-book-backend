@@ -23,6 +23,7 @@ use App\Http\Controllers\InternalRetreatRegistrationController;
 use App\Http\Controllers\InternalRetreatRequestController;
 use App\Http\Controllers\KatinaCeremonyRequestFormController;
 use App\Http\Controllers\LandLotRequestController;
+use App\Http\Controllers\LifelongMembershipRequestController;
 use App\Http\Controllers\MaintenanceFundRequestController;
 use App\Http\Controllers\MaintenanceRequestController;
 use App\Http\Controllers\MembershipRequestController;
@@ -311,6 +312,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/update-sangha-health-fund-requests/{id}', [SanghaHealthFundRequestController::class, 'update']);
     Route::patch('/update-sangha-health-fund-requests/{id}/status', [SanghaHealthFundRequestController::class, 'updateStatus']);
     Route::delete('/delete-sangha-health-fund-requests/{id}', [SanghaHealthFundRequestController::class, 'destroy']);
+
+
+// Lifelong Membership Request Routes
+    Route::put('/update-lifelong-membership-requests/{id}', [LifelongMembershipRequestController::class, 'update']);
+    Route::patch('/update-lifelong-membership-requests/{id}/status', [LifelongMembershipRequestController::class, 'updateStatus']);
+    Route::delete('/delete-lifelong-membership-requests/{id}', [LifelongMembershipRequestController::class, 'destroy']);
 });
 
 
@@ -533,3 +540,8 @@ Route::get('/get-maintenance-fund-requests/{id}', [MaintenanceFundRequestControl
 Route::get('/get-sangha-health-fund-requests/', [SanghaHealthFundRequestController::class, 'index']);
 Route::post('/create-sangha-health-fund-requests/', [SanghaHealthFundRequestController::class, 'store']);
 Route::get('/get-sangha-health-fund-requests/{id}', [SanghaHealthFundRequestController::class, 'show']);
+
+// Lifelong Membership Request Routes
+Route::get('/get-lifelong-membership-requests/', [LifelongMembershipRequestController::class, 'index']);
+Route::post('/create-lifelong-membership-requests/', [LifelongMembershipRequestController::class, 'store']);
+Route::get('/get-lifelong-membership-requests/{id}', [LifelongMembershipRequestController::class, 'show']);
