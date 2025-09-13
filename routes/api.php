@@ -15,12 +15,14 @@ use App\Http\Controllers\FuturePlansRequestFormController;
 use App\Http\Controllers\GilanPasaRequestController;
 use App\Http\Controllers\GuestSpeakerRegistrationController;
 use App\Http\Controllers\GuestSpeakerRequestController;
+use App\Http\Controllers\IndividualPoojaRequestController;
 use App\Http\Controllers\InternalRetreatController;
 use App\Http\Controllers\InternalRetreatOrganiserRegistrationController;
 use App\Http\Controllers\InternalRetreatRegistrationController;
 use App\Http\Controllers\InternalRetreatRequestController;
 use App\Http\Controllers\KatinaCeremonyRequestFormController;
 use App\Http\Controllers\LandLotRequestController;
+use App\Http\Controllers\MembershipRequestController;
 use App\Http\Controllers\OrdinationRegistrationController;
 use App\Http\Controllers\OrdinationRequestController;
 use App\Http\Controllers\ParittaAtHomeRequestFormController;
@@ -269,6 +271,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/update-land-lot-requests/{id}', [LandLotRequestController::class, 'update']);
     Route::patch('/update-land-lot-requests/{id}/status', [LandLotRequestController::class, 'updateStatus']);
     Route::delete('/delete-land-lot-requests/{id}', [LandLotRequestController::class, 'destroy']);
+
+    // Membership Request Routes
+    Route::put('/update-membership-requests/{id}', [MembershipRequestController::class, 'update']);
+    Route::patch('/update-membership-requests/{id}/status', [MembershipRequestController::class, 'updateStatus']);
+    Route::delete('/delete-membership-requests/{id}', [MembershipRequestController::class, 'destroy']);
+
+// Individual Pooja Request Routes
+    Route::put('/update-individual-pooja-requests/{id}', [IndividualPoojaRequestController::class, 'update']);
+    Route::patch('/update-individual-pooja-requests/{id}/status', [IndividualPoojaRequestController::class, 'updateStatus']);
+    Route::delete('/delete-individual-pooja-requests/{id}', [IndividualPoojaRequestController::class, 'destroy']);
 });
 
 
@@ -456,3 +468,13 @@ Route::get('/get-ordination-requests/{id}', [OrdinationRequestController::class,
 Route::get('/get-land-lot-requests/', [LandLotRequestController::class, 'index']);
 Route::post('/create-land-lot-requests/', [LandLotRequestController::class, 'store']);
 Route::get('/get-land-lot-requests/{id}', [LandLotRequestController::class, 'show']);
+
+// Membership Request Routes
+Route::get('/get-membership-requests/', [MembershipRequestController::class, 'index']);
+Route::post('/create-membership-requests/', [MembershipRequestController::class, 'store']);
+Route::get('/get-membership-requests/{id}', [MembershipRequestController::class, 'show']);
+
+// Individual Pooja Request Routes
+Route::get('/get-individual-pooja-requests/', [IndividualPoojaRequestController::class, 'index']);
+Route::post('/create-individual-pooja-requests/', [IndividualPoojaRequestController::class, 'store']);
+Route::get('/get-individual-pooja-requests/{id}', [IndividualPoojaRequestController::class, 'show']);
