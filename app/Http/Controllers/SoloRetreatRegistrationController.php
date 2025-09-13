@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\SoloRetreatRegistration;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 
@@ -47,7 +48,7 @@ class SoloRetreatRegistrationController extends Controller
             'departure_date' => 'nullable|date|after_or_equal:arrival_date',
             'emergency_mobile_number_1' => 'nullable|string|max:20',
             'emergency_mobile_number_2' => 'nullable|string|max:20',
-            'pdf_upload' => 'nullable|string',
+            'pdf_upload' => 'nullable|string', // base64 string
             'sign_full_name' => 'nullable|string|max:255',
             'sign_date' => 'nullable|date',
         ]);
@@ -62,6 +63,26 @@ class SoloRetreatRegistrationController extends Controller
         try {
             $data = $request->all();
             $data['ip_address'] = $request->ip();
+
+            // Handle PDF upload (if exists)
+            if (!empty($request->pdf_upload)) {
+                $pdfData = $request->pdf_upload;
+
+                // Remove "data:application/pdf;base64," if present
+                if (strpos($pdfData, 'base64,') !== false) {
+                    $pdfData = explode('base64,', $pdfData)[1];
+                }
+
+                $pdfData = base64_decode($pdfData);
+                $fileName = 'solo_retreat_' . time() . '.pdf';
+                $filePath = 'uploads/retreat_pdfs/' . $fileName;
+
+                // Store file in storage/app/public/uploads/retreat_pdfs
+                Storage::disk('public')->put($filePath, $pdfData);
+
+                // Save file path in DB instead of base64
+                $data['pdf_upload'] = $filePath;
+            }
 
             $registration = SoloRetreatRegistration::create($data);
 
@@ -79,6 +100,7 @@ class SoloRetreatRegistrationController extends Controller
             ], 500);
         }
     }
+
 
     /**
      * Display the specified resource.

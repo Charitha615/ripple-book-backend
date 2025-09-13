@@ -13,9 +13,16 @@ use App\Http\Controllers\ExternalRetreatRequestFormGlenWaverleyController;
 use App\Http\Controllers\FiveYearRequestController;
 use App\Http\Controllers\FuturePlansRequestFormController;
 use App\Http\Controllers\GilanPasaRequestController;
+use App\Http\Controllers\GuestSpeakerRegistrationController;
 use App\Http\Controllers\GuestSpeakerRequestController;
+use App\Http\Controllers\InternalRetreatController;
 use App\Http\Controllers\InternalRetreatOrganiserRegistrationController;
+use App\Http\Controllers\InternalRetreatRegistrationController;
+use App\Http\Controllers\InternalRetreatRequestController;
 use App\Http\Controllers\KatinaCeremonyRequestFormController;
+use App\Http\Controllers\LandLotRequestController;
+use App\Http\Controllers\OrdinationRegistrationController;
+use App\Http\Controllers\OrdinationRequestController;
 use App\Http\Controllers\ParittaAtHomeRequestFormController;
 use App\Http\Controllers\PirikaraRequestController;
 use App\Http\Controllers\SermonRequestController;
@@ -223,6 +230,45 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('update-pirikara-requests/{id}', [PirikaraRequestController::class, 'update']);
     Route::patch('update-pirikara-requests/{id}/status', [PirikaraRequestController::class, 'updateStatus']);
     Route::delete('delete-pirikara-requests/{id}', [PirikaraRequestController::class, 'destroy']);
+
+
+    Route::post('/create-internal-retreats', [InternalRetreatController::class, 'store']);
+
+// Update a retreat
+    Route::put('/update-internal-retreats/{id}', [InternalRetreatController::class, 'update']);
+
+// Delete a retreat
+    Route::delete('/delete-internal-retreats/{id}', [InternalRetreatController::class, 'destroy']);
+
+    Route::put('/update-internal-retreat-requests/{id}', [InternalRetreatRequestController::class, 'update']);
+    Route::patch('/update-internal-retreat-requests/{id}/status', [InternalRetreatRequestController::class, 'updateStatus']);
+    Route::delete('/delete-internal-retreat-requests/{id}', [InternalRetreatRequestController::class, 'destroy']);
+
+// Internal Retreat Registration Routes
+    Route::put('/update-internal-retreat-registrations/{id}', [InternalRetreatRegistrationController::class, 'update']);
+    Route::patch('/update-internal-retreat-registrations/{id}/status', [InternalRetreatRegistrationController::class, 'updateStatus']);
+    Route::delete('/delete-internal-retreat-registrations/{id}', [InternalRetreatRegistrationController::class, 'destroy']);
+
+// Guest Speaker Registration Routes
+    Route::put('/update-guest-speaker-registrations/{id}', [GuestSpeakerRegistrationController::class, 'update']);
+    Route::patch('/update-guest-speaker-registrations/{id}/status', [GuestSpeakerRegistrationController::class, 'updateStatus']);
+    Route::delete('/delete-guest-speaker-registrations/{id}', [GuestSpeakerRegistrationController::class, 'destroy']);
+
+    // Ordination Registration Routes
+
+    Route::put('/update-ordination-registrations/{id}', [OrdinationRegistrationController::class, 'update']);
+    Route::patch('/update-ordination-registrations/{id}/status', [OrdinationRegistrationController::class, 'updateStatus']);
+    Route::delete('/delete-ordination-registrations/{id}', [OrdinationRegistrationController::class, 'destroy']);
+
+// Ordination Request Routes
+    Route::put('/update-ordination-requests/{id}', [OrdinationRequestController::class, 'update']);
+    Route::patch('/update-ordination-requests/{id}/status', [OrdinationRequestController::class, 'updateStatus']);
+    Route::delete('/delete-ordination-requests/{id}', [OrdinationRequestController::class, 'destroy']);
+
+    // Land Lot Request Routes
+    Route::put('/update-land-lot-requests/{id}', [LandLotRequestController::class, 'update']);
+    Route::patch('/update-land-lot-requests/{id}/status', [LandLotRequestController::class, 'updateStatus']);
+    Route::delete('/delete-land-lot-requests/{id}', [LandLotRequestController::class, 'destroy']);
 });
 
 
@@ -261,8 +307,6 @@ Route::post('/five_year-request', [FiveYearRequestController::class, 'store']);
 
 // Gilan Pasa
 Route::post('/gilanpasa-request', [GilanPasaRequestController::class, 'store']);
-
-
 
 
 /*
@@ -364,7 +408,6 @@ Route::get('get-paritta-at-home-requests/{id}', [ParittaAtHomeRequestFormControl
 Route::post('create-paritta-at-home-requests/', [ParittaAtHomeRequestFormController::class, 'apiStore']);
 
 
-
 Route::get('get-dhamma-sermon-requests/', [DhammaSermonRequestController::class, 'apiIndex']);
 Route::get('get-dhamma-sermon-requests/{id}', [DhammaSermonRequestController::class, 'apiShow']);
 Route::post('create-dhamma-sermon-requests/', [DhammaSermonRequestController::class, 'apiStore']);
@@ -375,3 +418,41 @@ Route::get('get-pirikara-requests', [PirikaraRequestController::class, 'index'])
 Route::get('get-pirikara-requests/{id}', [PirikaraRequestController::class, 'show']);
 
 
+// Bulk delete retreats
+Route::post('/delete-internal-retreats/bulk-delete', [InternalRetreatController::class, 'bulkDelete']);
+
+
+Route::get('/get-internal-retreats', [InternalRetreatController::class, 'index']);
+Route::get('/get-internal-retreats/{id}', [InternalRetreatController::class, 'show']);
+
+// Internal Retreat Request Routes
+
+Route::get('/get-internal-retreat-requests/', [InternalRetreatRequestController::class, 'index']);
+Route::post('/create-internal-retreat-requests/', [InternalRetreatRequestController::class, 'store']);
+Route::get('/get-internal-retreat-requests/{id}', [InternalRetreatRequestController::class, 'show']);
+
+
+// Internal Retreat Registration Routes
+Route::get('/get-internal-retreat-registrations/', [InternalRetreatRegistrationController::class, 'index']);
+Route::post('/create-internal-retreat-registrations/', [InternalRetreatRegistrationController::class, 'store']);
+Route::get('/get-internal-retreat-registrations/{id}', [InternalRetreatRegistrationController::class, 'show']);
+
+// Guest Speaker Registration Routes
+Route::get('/get-guest-speaker-registrations/', [GuestSpeakerRegistrationController::class, 'index']);
+Route::post('/create-guest-speaker-registrations/', [GuestSpeakerRegistrationController::class, 'store']);
+Route::get('/get-guest-speaker-registrations/{id}', [GuestSpeakerRegistrationController::class, 'show']);
+
+// Ordination Registration Routes
+Route::get('/get-ordination-registrations/', [OrdinationRegistrationController::class, 'index']);
+Route::post('/create-ordination-registrations/', [OrdinationRegistrationController::class, 'store']);
+Route::get('/get-ordination-registrations/{id}', [OrdinationRegistrationController::class, 'show']);
+
+// Ordination Request Routes
+Route::get('/get-ordination-requests/', [OrdinationRequestController::class, 'index']);
+Route::post('/create-ordination-requests/', [OrdinationRequestController::class, 'store']);
+Route::get('/get-ordination-requests/{id}', [OrdinationRequestController::class, 'show']);
+
+// Land Lot Request Routes
+Route::get('/get-land-lot-requests/', [LandLotRequestController::class, 'index']);
+Route::post('/create-land-lot-requests/', [LandLotRequestController::class, 'store']);
+Route::get('/get-land-lot-requests/{id}', [LandLotRequestController::class, 'show']);
