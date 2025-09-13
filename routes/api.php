@@ -23,6 +23,7 @@ use App\Http\Controllers\InternalRetreatRequestController;
 use App\Http\Controllers\KatinaCeremonyRequestFormController;
 use App\Http\Controllers\LandLotRequestController;
 use App\Http\Controllers\MembershipRequestController;
+use App\Http\Controllers\OngoingProjectRequestController;
 use App\Http\Controllers\OrdinationRegistrationController;
 use App\Http\Controllers\OrdinationRequestController;
 use App\Http\Controllers\ParittaAtHomeRequestFormController;
@@ -281,6 +282,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/update-individual-pooja-requests/{id}', [IndividualPoojaRequestController::class, 'update']);
     Route::patch('/update-individual-pooja-requests/{id}/status', [IndividualPoojaRequestController::class, 'updateStatus']);
     Route::delete('/delete-individual-pooja-requests/{id}', [IndividualPoojaRequestController::class, 'destroy']);
+
+// Ongoing Project Request Routes
+    Route::put('/update-ongoing-project-requests/{id}', [OngoingProjectRequestController::class, 'update']);
+    Route::patch('/update-ongoing-project-requests/{id}/status', [OngoingProjectRequestController::class, 'updateStatus']);
+    Route::delete('/delete-ongoing-project-requests/{id}', [OngoingProjectRequestController::class, 'destroy']);
 });
 
 
@@ -478,3 +484,8 @@ Route::get('/get-membership-requests/{id}', [MembershipRequestController::class,
 Route::get('/get-individual-pooja-requests/', [IndividualPoojaRequestController::class, 'index']);
 Route::post('/create-individual-pooja-requests/', [IndividualPoojaRequestController::class, 'store']);
 Route::get('/get-individual-pooja-requests/{id}', [IndividualPoojaRequestController::class, 'show']);
+
+// Ongoing Project Request Routes
+Route::get('/get-ongoing-project-requests/', [OngoingProjectRequestController::class, 'index']);
+Route::post('/create-ongoing-project-requests/', [OngoingProjectRequestController::class, 'store']);
+Route::get('/get-ongoing-project-requests/{id}', [OngoingProjectRequestController::class, 'show']);
