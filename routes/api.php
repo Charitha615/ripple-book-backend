@@ -20,6 +20,7 @@ use App\Http\Controllers\InternalRetreatOrganiserRegistrationController;
 use App\Http\Controllers\InternalRetreatRegistrationController;
 use App\Http\Controllers\InternalRetreatRequestController;
 use App\Http\Controllers\KatinaCeremonyRequestFormController;
+use App\Http\Controllers\LandLotRequestController;
 use App\Http\Controllers\OrdinationRegistrationController;
 use App\Http\Controllers\OrdinationRequestController;
 use App\Http\Controllers\ParittaAtHomeRequestFormController;
@@ -263,6 +264,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/update-ordination-requests/{id}', [OrdinationRequestController::class, 'update']);
     Route::patch('/update-ordination-requests/{id}/status', [OrdinationRequestController::class, 'updateStatus']);
     Route::delete('/delete-ordination-requests/{id}', [OrdinationRequestController::class, 'destroy']);
+
+    // Land Lot Request Routes
+    Route::put('/update-land-lot-requests/{id}', [LandLotRequestController::class, 'update']);
+    Route::patch('/update-land-lot-requests/{id}/status', [LandLotRequestController::class, 'updateStatus']);
+    Route::delete('/delete-land-lot-requests/{id}', [LandLotRequestController::class, 'destroy']);
 });
 
 
@@ -445,3 +451,8 @@ Route::get('/get-ordination-registrations/{id}', [OrdinationRegistrationControll
 Route::get('/get-ordination-requests/', [OrdinationRequestController::class, 'index']);
 Route::post('/create-ordination-requests/', [OrdinationRequestController::class, 'store']);
 Route::get('/get-ordination-requests/{id}', [OrdinationRequestController::class, 'show']);
+
+// Land Lot Request Routes
+Route::get('/get-land-lot-requests/', [LandLotRequestController::class, 'index']);
+Route::post('/create-land-lot-requests/', [LandLotRequestController::class, 'store']);
+Route::get('/get-land-lot-requests/{id}', [LandLotRequestController::class, 'show']);
