@@ -31,6 +31,7 @@ use App\Http\Controllers\OrdinationRegistrationController;
 use App\Http\Controllers\OrdinationRequestController;
 use App\Http\Controllers\ParittaAtHomeRequestFormController;
 use App\Http\Controllers\PirikaraRequestController;
+use App\Http\Controllers\SanghaHealthFundRequestController;
 use App\Http\Controllers\SermonRequestController;
 use App\Http\Controllers\DanaAtHomeController;
 use App\Http\Controllers\SoloRetreatController;
@@ -302,9 +303,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/delete-maintenance-requests/{id}', [MaintenanceRequestController::class, 'destroy']);
 
 // Maintenance Fund Request Routes
-    Route::put('/update-maintenance-fund-requests/{id}', [MaintenanceRequestController::class, 'update']);
-    Route::patch('/update-maintenance-fund-requests/{id}/status', [MaintenanceRequestController::class, 'updateStatus']);
-    Route::delete('/delete-maintenance-fund-requests/{id}', [MaintenanceRequestController::class, 'destroy']);
+    Route::put('/update-maintenance-fund-requests/{id}', [MaintenanceFundRequestController::class, 'update']);
+    Route::patch('/update-maintenance-fund-requests/{id}/status', [MaintenanceFundRequestController::class, 'updateStatus']);
+    Route::delete('/delete-maintenance-fund-requests/{id}', [MaintenanceFundRequestController::class, 'destroy']);
+
+// Sangha Health Fund Request Routes
+    Route::put('/update-sangha-health-fund-requests/{id}', [SanghaHealthFundRequestController::class, 'update']);
+    Route::patch('/update-sangha-health-fund-requests/{id}/status', [SanghaHealthFundRequestController::class, 'updateStatus']);
+    Route::delete('/delete-sangha-health-fund-requests/{id}', [SanghaHealthFundRequestController::class, 'destroy']);
 });
 
 
@@ -522,3 +528,8 @@ Route::get('/get-maintenance-requests/{id}', [MaintenanceRequestController::clas
 Route::get('/get-maintenance-fund-requests/', [MaintenanceFundRequestController::class, 'index']);
 Route::post('/create-maintenance-fund-requests/', [MaintenanceFundRequestController::class, 'store']);
 Route::get('/get-maintenance-fund-requests/{id}', [MaintenanceFundRequestController::class, 'show']);
+
+// Sangha Health Fund Request Routes
+Route::get('/get-sangha-health-fund-requests/', [SanghaHealthFundRequestController::class, 'index']);
+Route::post('/create-sangha-health-fund-requests/', [SanghaHealthFundRequestController::class, 'store']);
+Route::get('/get-sangha-health-fund-requests/{id}', [SanghaHealthFundRequestController::class, 'show']);
