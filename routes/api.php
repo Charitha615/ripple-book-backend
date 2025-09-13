@@ -11,6 +11,7 @@ use App\Http\Controllers\ExternalRetreatHallamController;
 use App\Http\Controllers\ExternalRetreatPackenhamController;
 use App\Http\Controllers\ExternalRetreatRequestFormGlenWaverleyController;
 use App\Http\Controllers\FiveYearRequestController;
+use App\Http\Controllers\FuturePlansRequestController;
 use App\Http\Controllers\FuturePlansRequestFormController;
 use App\Http\Controllers\GilanPasaRequestController;
 use App\Http\Controllers\GuestSpeakerRegistrationController;
@@ -287,6 +288,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/update-ongoing-project-requests/{id}', [OngoingProjectRequestController::class, 'update']);
     Route::patch('/update-ongoing-project-requests/{id}/status', [OngoingProjectRequestController::class, 'updateStatus']);
     Route::delete('/delete-ongoing-project-requests/{id}', [OngoingProjectRequestController::class, 'destroy']);
+
+// Future Plans Request Routes
+    Route::put('/update-future-plans-requests/{id}', [FuturePlansRequestController::class, 'update']);
+    Route::patch('/update-future-plans-requests/{id}/status', [FuturePlansRequestController::class, 'updateStatus']);
+    Route::delete('/delete-future-plans-requests/{id}', [FuturePlansRequestController::class, 'destroy']);
+
+
 });
 
 
@@ -489,3 +497,8 @@ Route::get('/get-individual-pooja-requests/{id}', [IndividualPoojaRequestControl
 Route::get('/get-ongoing-project-requests/', [OngoingProjectRequestController::class, 'index']);
 Route::post('/create-ongoing-project-requests/', [OngoingProjectRequestController::class, 'store']);
 Route::get('/get-ongoing-project-requests/{id}', [OngoingProjectRequestController::class, 'show']);
+
+// Future Plans Request Routes
+Route::get('/get-future-plans-requests/', [FuturePlansRequestController::class, 'index']);
+Route::post('/create-future-plans-requests/', [FuturePlansRequestController::class, 'store']);
+Route::get('/get-future-plans-requests/{id}', [FuturePlansRequestController::class, 'show']);
